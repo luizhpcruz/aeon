@@ -1,0 +1,1 @@
+Conteúdo de exemplo: cmb_planck_data.txt

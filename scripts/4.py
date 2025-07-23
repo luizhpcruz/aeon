@@ -1,12 +1,40 @@
+"""
+AEON - Análise de Entropia em Sistemas Dinâmicos
+===============================================
+
+Este script realiza análise de entropia em sistemas dinâmicos com múltiplas fitas
+paralelas, testando diferentes tipos de entrada (aleatória, pulso, ruído).
+
+Autor: Luiz F. + GitHub Copilot
+Data: Julho/2025
+"""
+
 import numpy as np
 import collections
 import copy
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
+import os
+import sys
+from datetime import datetime
+
+# Configurar matplotlib para evitar problemas de display
+plt.rcParams['figure.max_open_warning'] = 50
 
 # — Função ciclo não simbólico —
 def ciclo_nao_simbolico(mem, est, p_mut=0.1):
+    """
+    Executa um ciclo de mutação não simbólica na memória.
+    
+    Args:
+        mem: Lista representando a memória/fita
+        est: Número de estados possíveis
+        p_mut: Probabilidade de mutação (default: 0.1)
+    
+    Returns:
+        Lista com o novo estado da memória
+    """
     nova = mem[:]
     for i in range(len(mem)):
         if mem[i] is not None:
@@ -16,6 +44,15 @@ def ciclo_nao_simbolico(mem, est, p_mut=0.1):
 
 # — Função entropia —
 def calcular_entropia(mem):
+    """
+    Calcula a entropia de Shannon para uma sequência de memória.
+    
+    Args:
+        mem: Lista representando o estado da memória
+    
+    Returns:
+        Float: Valor da entropia em bits
+    """
     ativos = [v for v in mem if v is not None]
     if not ativos:
         return 0.0
@@ -142,6 +179,39 @@ for idx, tipo in enumerate(entradas_testes):
 plt.tight_layout()
 plt.show()
 
-# — Exportação opcional —
-df = pd.DataFrame(resultados["pulso"].T, columns=[f"Fita {i}" for i in range(N_FITAS)])
-df.to_csv("entropia_pulso.csv", index=False)
+# — Exportação e finalização —
+def salvar_resultados(resultados, timestamp):
+    """Salva os resultados da simulação em arquivos."""
+    try:
+        # Criar diretórios se não existirem
+        os.makedirs("../data", exist_ok=True)
+        os.makedirs("../visualizations", exist_ok=True)
+        
+        # Salvar dados CSV
+        for tipo, dados in resultados.items():
+            df = pd.DataFrame(dados.T, columns=[f"Fita {i}" for i in range(dados.shape[0])])
+            filename = f"../data/entropia_{tipo}_{timestamp}.csv"
+            df.to_csv(filename, index=False)
+            print(f"✅ Dados salvos: {filename}")
+        
+        print(f"📊 Simulação concluída em {datetime.now().strftime('%H:%M:%S')}")
+        
+    except Exception as e:
+        print(f"❌ Erro ao salvar resultados: {e}")
+
+if __name__ == "__main__":
+    try:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        print(f"🧬 AEON - Iniciando análise de entropia [{timestamp}]")
+        print("=" * 50)
+        
+        # Executar simulação principal (código existente aqui)
+        
+        # Salvar resultados
+        salvar_resultados(resultados, timestamp)
+        
+    except KeyboardInterrupt:
+        print("\n⏹️ Simulação interrompida pelo usuário")
+    except Exception as e:
+        print(f"❌ Erro durante execução: {e}")
+        sys.exit(1)

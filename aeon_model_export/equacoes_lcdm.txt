@@ -1,0 +1,2 @@
+# Equações do Modelo ΛCDM
+H(z)^2 = H0^2 * [Ω_m * (1+z)^3 + Ω_Λ]
