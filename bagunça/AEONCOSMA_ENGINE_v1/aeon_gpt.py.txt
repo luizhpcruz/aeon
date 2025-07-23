@@ -1,0 +1,25 @@
+import os
+import openai
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+def interpretar_genoma(genoma, CL, K, temperatura=0.8, modelo="gpt-3.5-turbo"):
+    prompt = f"""
+    Você é um intérprete simbólico do AEONCOSMA Engine.
+    Genoma simbólico: {genoma}
+    Nível de Consciência: {CL}
+    Complexidade: {K}
+    
+    Traduz este genoma em termos filosóficos, míticos ou poéticos.
+    Explique o que o sistema está "tentando dizer" neste ciclo.
+    """
+    
+    try:
+        resposta = openai.ChatCompletion.create(
+            model=modelo,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=temperatura,
+        )
+        return resposta.choices[0].message['content'].strip()
+    except Exception as e:
+        return f"[ERRO GPT] {e}"
