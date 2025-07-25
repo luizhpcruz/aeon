@@ -1,0 +1,7 @@
+npc:
+  name: "Guardian Sigma"
+  memory_enabled: true
+  symbolic_logic: "active"
+  context:
+    amplitude: 1.0
+    threshold: 0.7
