@@ -1,0 +1,32 @@
+{
+  "test_settings": {
+    "max_nodes": 1000,
+    "base_port": 20000,
+    "monitoring_port": 8001,
+    "test_duration_seconds": 1800,
+    "phases": {
+      "bootstrap": 10,
+      "early_network": 50,
+      "growth_phase": 200,
+      "mature_network": 500,
+      "stress_test": 1000
+    }
+  },
+  "monitoring": {
+    "prometheus_enabled": true,
+    "real_time_dashboard": true,
+    "log_level": "INFO",
+    "metrics_retention_hours": 24
+  },
+  "network_settings": {
+    "connection_timeout": 3,
+    "max_connections_per_node": 8,
+    "peer_discovery_interval": 10,
+    "consensus_threshold": 0.51
+  },
+  "business_metrics": {
+    "target_arr_usd": 5000000,
+    "scalability_threshold": 500,
+    "commercial_validation_nodes": 100
+  }
+}

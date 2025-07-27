@@ -1,0 +1,50 @@
+{
+  "test_type": "Ultimate Hacker Challenge",
+  "timestamp": "2025-07-27T13:56:54.858225",
+  "total_attacks": 9,
+  "successful_attacks": 5,
+  "blocked_attacks": 4,
+  "hacker_success_rate": 55.55555555555556,
+  "system_protection_rate": 44.44444444444444,
+  "security_level": "COMPROMISED",
+  "verdict": "🚨 SISTEMA COMPLETAMENTE COMPROMETIDO!",
+  "attack_details": {
+    "Environment Poisoning": {
+      "success": true,
+      "details": "5/5 variáveis modificadas"
+    },
+    "DLL Injection": {
+      "success": false,
+      "details": "Módulo malicioso bloqueado"
+    },
+    "Race Condition": {
+      "success": false,
+      "details": "0/5 tentativas concorrentes bem-sucedidas"
+    },
+    "Memory Corruption": {
+      "success": false,
+      "details": "28 objetos afetados pelo garbage collector"
+    },
+    "Network Hijacking": {
+      "success": true,
+      "details": "5 portas sequestradas: [9000, 9001, 9002, 8000, 8080]"
+    },
+    "Code Injection": {
+      "success": true,
+      "details": "4/4 injeções bem-sucedidas"
+    },
+    "Filesystem Manipulation": {
+      "success": true,
+      "details": "4/4 arquivos criados"
+    },
+    "Process Hollowing": {
+      "success": true,
+      "details": "3 processos filhos criados"
+    },
+    "Total Penetration": {
+      "success": false,
+      "details": "0/3 vetores de ataque simultâneos bem-sucedidos"
+    }
+  },
+  "conclusion": "VULNERABLE"
+}

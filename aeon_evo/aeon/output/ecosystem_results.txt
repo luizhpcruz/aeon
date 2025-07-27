@@ -1,0 +1,70 @@
+# SIMULAÇÃO DE ECOSSISTEMA AEON
+# Desenvolvido por Luiz Cruz - 2025
+
+# PROPRIEDADES DA REDE
+Espécies: 4
+Interações: 1
+Densidade: 0.1667
+Mais conectada: ('species_2', 1)
+
+# EVOLUÇÃO DO FITNESS
+Geração 1:
+  species_1: 0.852075
+  species_2: 0.795954
+  species_3: 0.700365
+  species_4: 0.727682
+
+Geração 2:
+  species_1: 0.852075
+  species_2: 0.795954
+  species_3: 0.700365
+  species_4: 0.727682
+
+Geração 3:
+  species_1: 0.852075
+  species_2: 0.795954
+  species_3: 0.700365
+  species_4: 0.727682
+
+Geração 4:
+  species_1: 0.852075
+  species_2: 0.795954
+  species_3: 0.700365
+  species_4: 0.727682
+
+Geração 5:
+  species_1: 0.852075
+  species_2: 0.795954
+  species_3: 0.700365
+  species_4: 0.727682
+
+Geração 6:
+  species_1: 0.852075
+  species_2: 0.795975
+  species_3: 0.700365
+  species_4: 0.727404
+
+Geração 7:
+  species_1: 0.852075
+  species_2: 0.795975
+  species_3: 0.700365
+  species_4: 0.727404
+
+Geração 8:
+  species_1: 0.852075
+  species_2: 0.795975
+  species_3: 0.700365
+  species_4: 0.727404
+
+Geração 9:
+  species_1: 0.852075
+  species_2: 0.795975
+  species_3: 0.700365
+  species_4: 0.727404
+
+Geração 10:
+  species_1: 0.852075
+  species_2: 0.795975
+  species_3: 0.700365
+  species_4: 0.727404
+

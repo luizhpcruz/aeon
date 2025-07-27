@@ -1,0 +1,67 @@
+DOCUMENTO DE EXEMPLO - ANÁLISE DE MERCADO AEONCOSMA
+=======================================================
+
+Data: 27 de Julho de 2025
+Autor: Sistema AEONCOSMA Enterprise Adapter
+Categoria: Análise Financeira e Trading
+
+RESUMO EXECUTIVO
+================
+
+Este documento contém análises de mercado geradas pelo sistema AEONCOSMA para demonstração
+das capacidades de extração de insights de documentos empresariais.
+
+DADOS FINANCEIROS
+=================
+
+- Bitcoin (BTC): $45,230.50 USD (+2.3% nas últimas 24h)
+- Ethereum (ETH): $2,890.75 USD (+1.8% nas últimas 24h)
+- Volume de trading: $2.4 bilhões
+- Capitalização de mercado total: $1.2 trilhões
+
+INDICADORES TÉCNICOS
+====================
+
+RSI: 67.5 (território de sobrecompra moderada)
+MACD: Sinal de compra confirmado
+Bandas de Bollinger: Preço próximo à banda superior
+Media móvel 50: Tendência de alta mantida
+
+ANÁLISE FUNDAMENTAL
+===================
+
+Fatores positivos:
+- Adoção institucional crescente
+- Regulamentação mais clara em mercados desenvolvidos
+- Inovações em DeFi e NFTs continuam atraindo investidores
+
+Fatores de risco:
+- Volatilidade macroeconômica global
+- Possíveis mudanças regulatórias
+- Correlação crescente com mercados tradicionais
+
+RECOMENDAÇÕES
+=============
+
+1. Manter posições de longo prazo em ativos sólidos (BTC, ETH)
+2. Diversificar portfólio com altcoins promissoras
+3. Implementar stop-loss em 5-8% para proteção
+4. Monitorar indicadores de sentiment do mercado
+
+CONTATOS
+========
+
+Email: analise@aeoncosma.trading
+Telefone: +55 11 99999-8888
+Website: https://aeoncosma.ai/trading
+
+AVISO LEGAL
+===========
+
+Este documento é apenas para fins educacionais e de demonstração.
+Não constitui aconselhamento financeiro. Investimentos em criptomoedas
+envolvem riscos significativos e podem resultar em perdas totais.
+
+---
+Documento gerado automaticamente pelo AEONCOSMA Enterprise Adapter
+Sistema de inteligência artificial para análise de dados empresariais

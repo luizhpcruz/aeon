@@ -1,0 +1,80 @@
+# AEONCOSMA Configuration File
+# Sistema Proprietário de Trading com IA e Backup Criptografado
+
+system:
+  name: "AEONCOSMA PREDICTOR"
+  version: "2.0.1"
+  author: "Luiz Cruz"
+  year: 2025
+
+server:
+  host: "localhost"
+  port: 8080
+  ssl_enabled: false
+  auto_open_browser: true
+
+backup:
+  enabled: true
+  encryption: true
+  auto_backup_interval: 300  # 5 minutos
+  max_log_buffer: 10
+  compression: false
+  backup_types:
+    - logs
+    - full
+    - incremental
+
+security:
+  encryption_algorithm: "fernet"
+  key_rotation: false
+  session_based_keys: true
+  log_sensitive_data: false
+
+market:
+  data_sources:
+    - coingecko
+    - fallback_simulation
+  update_interval: 30
+  symbols:
+    - BTC
+    - ETH
+    - BNB
+    - ADA
+    - SOL
+
+prediction:
+  engine: "aeon_ai"
+  confidence_threshold: 0.6
+  timeframes:
+    - "1h"
+    - "24h"
+  factors:
+    - momentum
+    - technical_indicators
+    - consciousness_level
+
+ui:
+  theme: "cosmic"
+  auto_refresh: 30
+  log_display_limit: 100
+  chart_enabled: true
+
+logging:
+  level: "INFO"
+  console_output: true
+  file_output: true
+  encrypted_storage: true
+  categories:
+    - SYSTEM
+    - ACCESS
+    - MARKET
+    - PREDICTION
+    - BACKUP
+    - ERROR
+    - SECURITY
+
+consciousness:
+  initial_level: 1.0
+  max_level: 10.0
+  evolution_rate: 0.001
+  quantum_enabled: true

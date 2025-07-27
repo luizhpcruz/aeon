@@ -1,3 +1,4 @@
+# AEONCOSMA - Dependências Principais
 numpy>=1.24.0
 pandas>=2.1.0
 matplotlib>=3.7.0
@@ -7,4 +8,44 @@ uvicorn[standard]>=0.24.0
 pydantic>=2.5.0
 yfinance>=0.2.20
 websockets>=12.0
-asyncio
+structlog>=23.2.0
+prometheus-client>=0.19.0
+cryptography>=41.0.7
+joblib>=1.3.0
+requests>=2.31.0
+aiofiles>=23.2.0
+yaml>=6.0.1
+sqlite3
+
+# Dependências Opcionais para NLP Avançado
+# nltk>=3.8.1
+# spacy>=3.7.0
+# transformers>=4.35.0
+
+# Dependências Opcionais para Processamento de Documentos  
+# PyPDF2>=3.0.1
+# python-docx>=0.8.11
+# openpyxl>=3.1.2
+
+# Dependências Opcionais para GPU
+# cupy>=12.0.0
+# numba>=0.58.0
+
+# Dependências de Sistema (built-in, não precisam instalar)
+# asyncio
+# threading  
+# socket
+# json
+# hashlib
+# random
+# uuid
+# platform
+# subprocess
+# re
+# time
+# datetime
+# os
+# sys
+time
+pathlib
+pytest>=7.4.0

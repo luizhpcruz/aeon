@@ -1,0 +1,16 @@
+timestamp,symbol,price,volume,action,profit_loss,strategy
+2025-07-27 09:00:00,BTC,45230.50,1.25,BUY,0.0,momentum
+2025-07-27 09:15:00,ETH,2890.75,5.50,BUY,0.0,dip_buying
+2025-07-27 09:30:00,BTC,45180.25,0.75,SELL,+125.50,quick_profit
+2025-07-27 10:00:00,ADA,0.485,1000.0,BUY,0.0,accumulation
+2025-07-27 10:30:00,SOL,28.75,15.0,BUY,0.0,breakout
+2025-07-27 11:00:00,ETH,2905.20,3.25,SELL,+47.25,partial_profit
+2025-07-27 11:30:00,DOT,6.85,200.0,BUY,0.0,oversold_bounce
+2025-07-27 12:00:00,BTC,45350.00,2.0,BUY,0.0,trend_following
+2025-07-27 12:30:00,MATIC,0.95,2500.0,BUY,0.0,layer2_play
+2025-07-27 13:00:00,ADA,0.492,500.0,SELL,+35.00,profit_taking
+2025-07-27 13:30:00,SOL,29.15,10.0,SELL,+60.00,resistance_hit
+2025-07-27 14:00:00,LINK,7.25,100.0,BUY,0.0,oracle_recovery
+2025-07-27 14:30:00,ETH,2875.50,4.0,BUY,0.0,support_test
+2025-07-27 15:00:00,BTC,45125.75,1.5,SELL,-78.75,stop_loss
+2025-07-27 15:30:00,AVAX,12.40,50.0,BUY,0.0,ecosystem_growth

@@ -1,0 +1,17 @@
+
+# AEONCOSMA Prometheus Configuration
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: 'aeoncosma-ecosystem'
+    static_configs:
+      - targets: ['localhost:8001']
+    scrape_interval: 2s
+    metrics_path: /metrics
+
+  - job_name: 'system-metrics'
+    static_configs:
+      - targets: ['localhost:8002']
+    scrape_interval: 5s

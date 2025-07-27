@@ -1,0 +1,23 @@
+# LOGS DA SIMULAÇÃO AEON
+# Desenvolvido por Luiz Cruz - 2025
+
+# PARÂMETROS UTILIZADOS
+Espécie 1: {'A': 1.0, 'B': 2.0, 'phi': 0.1, 'C': 0.5, 'lambd': 0.01, 'D': 1.0}
+Espécie 2: {'A': 0.8, 'B': 1.5, 'phi': 0.2, 'C': 0.4, 'lambd': 0.02, 'D': 1.2}
+Espécie 3: {'A': 1.2, 'B': 2.5, 'phi': 0.3, 'C': 0.6, 'lambd': 0.01, 'D': 0.9}
+
+# ANÁLISE DOS RESULTADOS
+Espécie 1 - Estável: False
+  Valor final: 3.817343
+  Taxa convergência: 1.284296
+Espécie 2 - Estável: False
+  Valor final: 4.669124
+  Taxa convergência: 1.036088
+Espécie 3 - Estável: False
+  Valor final: 3.351089
+  Taxa convergência: 2.638279
+
+# RESUMO EVOLUTIVO
+Gerações: 3
+Diversidade final: 0.277812
+Convergiu: False

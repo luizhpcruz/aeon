@@ -1,0 +1,139 @@
+{
+  "data_sources": [
+    {
+      "source_id": "sample_api",
+      "source_type": "api", 
+      "name": "API de Exemplo JSONPlaceholder",
+      "description": "API de demonstração para testes",
+      "endpoint_url": "https://jsonplaceholder.typicode.com/posts",
+      "auth_config": {
+        "type": "none"
+      },
+      "data_format": "json",
+      "extraction_rules": {
+        "default_params": {
+          "_limit": 5
+        }
+      },
+      "refresh_interval": 3600,
+      "last_accessed": "",
+      "is_active": true,
+      "metadata": {
+        "example": true,
+        "rate_limit": "no_limit",
+        "documentation": "https://jsonplaceholder.typicode.com/"
+      }
+    },
+    {
+      "source_id": "local_documents",
+      "source_type": "file",
+      "name": "Documentos Locais",
+      "description": "Arquivos de texto e documentos locais",
+      "endpoint_url": "data/sample_document.txt",
+      "auth_config": {
+        "type": "none"
+      },
+      "data_format": "text",
+      "extraction_rules": {},
+      "refresh_interval": 1800,
+      "last_accessed": "",
+      "is_active": true,
+      "metadata": {
+        "directory": "data/",
+        "supported_formats": ["txt", "md", "json", "csv"]
+      }
+    },
+    {
+      "source_id": "crypto_api",
+      "source_type": "api",
+      "name": "CoinGecko API",
+      "description": "Dados de criptomoedas em tempo real",
+      "endpoint_url": "https://api.coingecko.com/api/v3/simple/price",
+      "auth_config": {
+        "type": "none"
+      },
+      "data_format": "json",
+      "extraction_rules": {
+        "default_params": {
+          "ids": "bitcoin,ethereum",
+          "vs_currencies": "usd"
+        }
+      },
+      "refresh_interval": 300,
+      "last_accessed": "",
+      "is_active": true,
+      "metadata": {
+        "category": "financial",
+        "rate_limit": "100_calls_per_minute",
+        "documentation": "https://www.coingecko.com/en/api"
+      }
+    },
+    {
+      "source_id": "news_api",
+      "source_type": "api",
+      "name": "NewsAPI Headlines",
+      "description": "Notícias e headlines globais",
+      "endpoint_url": "https://newsapi.org/v2/top-headlines",
+      "auth_config": {
+        "type": "api_key",
+        "header_name": "X-API-Key",
+        "api_key": "YOUR_API_KEY_HERE"
+      },
+      "data_format": "json",
+      "extraction_rules": {
+        "default_params": {
+          "country": "us",
+          "pageSize": 10
+        }
+      },
+      "refresh_interval": 900,
+      "last_accessed": "",
+      "is_active": false,
+      "metadata": {
+        "category": "news",
+        "requires_key": true,
+        "documentation": "https://newsapi.org/docs"
+      }
+    },
+    {
+      "source_id": "trading_data",
+      "source_type": "file",
+      "name": "Dados de Trading",
+      "description": "Histórico de operações e análises",
+      "endpoint_url": "data/trading_history.csv",
+      "auth_config": {
+        "type": "none"
+      },
+      "data_format": "csv",
+      "extraction_rules": {
+        "columns": ["timestamp", "symbol", "price", "volume", "action"],
+        "date_format": "%Y-%m-%d %H:%M:%S"
+      },
+      "refresh_interval": 1800,
+      "last_accessed": "",
+      "is_active": true,
+      "metadata": {
+        "category": "trading",
+        "contains_pii": false,
+        "format": "csv"
+      }
+    }
+  ],
+  "global_settings": {
+    "max_concurrent_requests": 5,
+    "default_timeout": 30,
+    "cache_enabled": true,
+    "cache_ttl": 300,
+    "retry_attempts": 3,
+    "retry_delay": 1,
+    "user_agent": "AEONCOSMA Enterprise Adapter/1.0"
+  },
+  "nlp_settings": {
+    "enabled": true,
+    "language": "en",
+    "extract_entities": true,
+    "sentiment_analysis": true,
+    "keyword_extraction": true,
+    "min_confidence": 0.5
+  }
+}

@@ -9,7 +9,7 @@ predição de preços e otimização de estratégias de trading.
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler # type: ignore
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from datetime import datetime, timedelta
