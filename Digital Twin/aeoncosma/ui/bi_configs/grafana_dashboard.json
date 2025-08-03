@@ -1,0 +1,126 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "AEONCOSMA Real-time Monitoring",
+    "tags": [
+      "aeoncosma",
+      "network",
+      "blockchain"
+    ],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "System CPU Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "aeoncosma_cpu_usage",
+            "legendFormat": "{{node_type}} - {{instance}}"
+          }
+        ],
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "Memory Usage Distribution",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "aeoncosma_memory_usage",
+            "legendFormat": "{{node_type}}"
+          }
+        ],
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "Network Consensus Rate",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "rate(aeoncosma_consensus_total[5m])",
+            "legendFormat": "Consensus/sec"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 8,
+          "x": 0,
+          "y": 9
+        }
+      },
+      {
+        "id": 4,
+        "title": "Active Nodes",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "aeoncosma_active_nodes",
+            "legendFormat": "Active Nodes"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 8,
+          "x": 8,
+          "y": 9
+        }
+      },
+      {
+        "id": 5,
+        "title": "Network Health Score",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "aeoncosma_health_score",
+            "legendFormat": "Health %"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                },
+                {
+                  "color": "yellow",
+                  "value": 70
+                },
+                {
+                  "color": "green",
+                  "value": 90
+                }
+              ]
+            }
+          }
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 8,
+          "x": 16,
+          "y": 9
+        }
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "5s"
+  }
+}

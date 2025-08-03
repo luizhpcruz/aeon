@@ -1,0 +1,48 @@
+{
+  "patterns": {},
+  "symbol_frequency": {
+    "MODERATE_LATENCY": 1,
+    "LATENCY_SPIKE": 3,
+    "CPU_HIGH": 1,
+    "MEMORY_HIGH": 1,
+    "HIGH_LATENCY": 1,
+    "CPU_CRITICAL": 1,
+    "MEMORY_CRITICAL": 1,
+    "NODE_FAILURES": 1,
+    "CONSENSUS_FAIL": 1,
+    "CONSENSUS_STRONG": 1
+  },
+  "sequence_transitions": {
+    "MODERATE_LATENCY": {
+      "LATENCY_SPIKE": 1
+    },
+    "LATENCY_SPIKE": {
+      "CPU_HIGH": 1,
+      "CPU_CRITICAL": 1,
+      "CONSENSUS_STRONG": 1
+    },
+    "CPU_HIGH": {
+      "MEMORY_HIGH": 1
+    },
+    "MEMORY_HIGH": {
+      "HIGH_LATENCY": 1
+    },
+    "HIGH_LATENCY": {
+      "LATENCY_SPIKE": 1
+    },
+    "CPU_CRITICAL": {
+      "MEMORY_CRITICAL": 1
+    },
+    "MEMORY_CRITICAL": {
+      "NODE_FAILURES": 1
+    },
+    "NODE_FAILURES": {
+      "CONSENSUS_FAIL": 1
+    },
+    "CONSENSUS_FAIL": {
+      "LATENCY_SPIKE": 1
+    }
+  },
+  "baseline_entropy": 0.0,
+  "last_updated": "2025-08-02T16:00:12.633041"
+}

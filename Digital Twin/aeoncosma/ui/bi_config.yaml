@@ -1,0 +1,28 @@
+grafana:
+  api_key: your_grafana_api_key_here
+  datasources:
+  - name: AEONCOSMA_Metrics
+    type: prometheus
+    url: http://localhost:9090
+  - name: AEONCOSMA_Logs
+    type: loki
+    url: http://localhost:3100
+  host: localhost
+  port: 3000
+metabase:
+  database_id: 1
+  host: localhost
+  password: secure_password
+  port: 3000
+  username: admin@aeoncosma.com
+superset:
+  base_url: http://localhost:8088
+  database_connections:
+  - database: aeoncosma
+    driver: postgresql
+    host: localhost
+    password: secure_password
+    port: 5432
+    username: aeoncosma_user
+  password: admin
+  username: admin

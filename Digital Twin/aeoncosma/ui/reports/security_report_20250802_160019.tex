@@ -1,0 +1,263 @@
+
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+\geometry{margin=2.5cm}
+\pgfplotsset{compat=1.17}
+
+% Configuração do cabeçalho
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{AEONCOSMA - Relatório de Segurança}}
+\fancyhead[R]{\today}
+\fancyfoot[C]{\thepage}
+
+% Cores personalizadas
+\definecolor{aeonblue}{RGB}{0,102,204}
+\definecolor{aeongray}{RGB}{128,128,128}
+\definecolor{critical}{RGB}{220,20,60}
+\definecolor{warning}{RGB}{255,165,0}
+\definecolor{success}{RGB}{34,139,34}
+
+\title{
+    \vspace{-2cm}
+    \begin{center}
+        \includegraphics[width=0.3\textwidth]{aeon_logo.png}\\[1cm]
+        \textbf{\Huge AEONCOSMA}\\[0.5cm]
+        \textbf{\Large Relatório de Segurança da Rede}\\[0.3cm]
+        \textcolor{aeongray}{\large Sistema de Monitoramento Digital Twin}
+    \end{center}
+    \vspace{-1cm}
+}
+
+\date{02 de August de 2025}
+\author{Sistema Automatizado AEONCOSMA}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Resumo Executivo}
+
+Este relatório apresenta uma análise abrangente da segurança da rede AEONCOSMA, cobrindo o período de 26/07/2025 - 02/08/2025. O sistema de monitoramento detectou 0 padrões de segurança e analisou 0 nós da rede.
+
+\subsection{Status Geral da Segurança}
+
+\begin{center}
+\begin{tikzpicture}
+    \pie[text=legend, radius=2.5]{
+        7/Crítico,
+        5/Alto,
+        10/Médio,
+        20/Baixo
+    }
+\end{tikzpicture}
+\end{center}
+
+\textbf{Nível de Segurança Geral:} \textcolor{critical}{0.0\% - ATENÇÃO NECESSÁRIA}
+
+\subsection{Principais Descobertas}
+
+\begin{itemize}[leftmargin=*]
+    \item Nenhuma ameaça crítica detectada
+    \item Excelente disponibilidade da rede (>95\%)
+\end{itemize}
+
+\section{Análise de Ameaças Detectadas}
+
+\subsection{Detecções por Categoria}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Categoria de Ameaça} & \textbf{Detecções} & \textbf{Severidade Máxima} \\
+\midrule
+Ataques DDoS & 2 & \textcolor{aeonblue}{MÉDIO} \\
+Falhas de Consenso & 1 & \textcolor{warning}{ALTO} \\
+Anomalias de Rede & 3 & \textcolor{success}{BAIXO} \\
+Tentativas de Intrusão & 0 & \textcolor{aeongray}{N/A} \\
+\bottomrule
+\end{tabular}
+\caption{Resumo das ameaças detectadas por categoria}
+\end{table}
+
+\subsection{Timeline de Eventos Críticos}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=\textwidth,
+        height=8cm,
+        xlabel={Tempo},
+        ylabel={Severidade},
+        grid=major,
+        legend pos=north west
+    ]
+    CRITICAL_EVENTS_PLOT
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\section{Métricas de Performance da Rede}
+
+\subsection{Latência da Rede}
+
+\textbf{Latência Média:} 0.0 ms\\
+\textbf{Latência Máxima:} 0.0 ms\\
+\textbf{Percentil 95:} 0.0 ms
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=\textwidth,
+        height=6cm,
+        xlabel={Tempo},
+        ylabel={Latência (ms)},
+        grid=major
+    ]
+    LATENCY_PLOT
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Utilização de Recursos}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Recurso} & \textbf{Média (\%)} & \textbf{Máximo (\%)} & \textbf{Status} \\
+\midrule
+CPU & 0.0 & 0.0 & \textcolor{success}{BAIXO} \\
+Memória & 0.0 & 0.0 & \textcolor{success}{BAIXO} \\
+Rede & AVERAGE_NETWORK & MAX_NETWORK & \textcolor{success}{BAIXO} \\
+\bottomrule
+\end{tabular}
+\caption{Utilização de recursos do sistema}
+\end{table}
+
+\section{Análise de Consenso}
+
+\subsection{Participação no Consenso}
+
+\textbf{Taxa de Participação Média:} 0.0\%\\
+\textbf{Nós Ativos no Consenso:} 0\\
+\textbf{Falhas de Consenso:} 0
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=\textwidth,
+        height=6cm,
+        xlabel={Tempo},
+        ylabel={Taxa de Participação (\%)},
+        grid=major,
+        ymin=0,
+        ymax=100
+    ]
+    CONSENSUS_PLOT
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\section{Detecção de Anomalias}
+
+\subsection{Algoritmos de Detecção Utilizados}
+
+\begin{enumerate}
+    \item \textbf{Detecção de Padrões Simbólicos}: Análise de sequências de eventos
+    \item \textbf{Análise Estatística}: Desvios das métricas baseline
+    \item \textbf{Machine Learning}: Detecção de comportamentos anômalos
+    \item \textbf{Análise de Entropia}: Medição da aleatoriedade dos eventos
+\end{enumerate}
+
+\subsection{Resultados da Detecção}
+
+
+O sistema de detecção de anomalias analisou 0 padrões distintos e identificou 0 eventos anômalos.
+A entropia atual da rede é 4.50, indicando um nível normal de aleatoriedade nos eventos.
+
+\begin{itemize}
+\item Padrões simbólicos detectados: 0
+\item Eventos anômalos identificados: 0
+\item Score de entropia: 4.50
+\item Desvios estatísticos: 0
+\end{itemize}
+
+
+\section{Recomendações de Segurança}
+
+\subsection{Ações Imediatas}
+
+\item Verificar integridade dos nós validadores
+\item Atualizar regras de firewall se necessário
+
+\subsection{Melhorias de Longo Prazo}
+
+\item Implementar algoritmos de machine learning para detecção proativa
+\item Desenvolver sistema de resposta automática a incidentes
+\item Estabelecer métricas de baseline mais robustas
+\item Criar dashboard em tempo real para operadores
+\item Implementar sistema de backup automatizado
+
+\section{Conclusões}
+
+
+O sistema apresenta boa segurança com algumas áreas para melhoria. O monitoramento contínuo e as análises automatizadas forneceram insights valiosos 
+sobre o estado da rede. As recomendações apresentadas devem ser implementadas de acordo com 
+suas prioridades para manter e melhorar a segurança operacional.
+
+A implementação das medidas sugeridas resultará em maior resiliência e confiabilidade do 
+sistema AEONCOSMA.
+
+
+\section{Apêndices}
+
+\subsection{Apêndice A: Dados Técnicos Detalhados}
+
+
+\begin{verbatim}
+Timestamp de Coleta: 2025-08-02T16:00:19.602958
+Nós Totais: N/A
+Nós Online: N/A
+CPU Média: N/A%
+Memória Média: N/A%
+Latência Média: N/Ams
+Taxa de Consenso: N/A
+\end{verbatim}
+
+
+\subsection{Apêndice B: Configurações do Sistema}
+
+
+\begin{verbatim}
+Sistema: AEONCOSMA Digital Twin Network
+Versão: 1.0.0
+Algoritmo de Consenso: Proof of Stake Modificado
+Criptografia: SHA-256, ECDSA
+Protocolos de Rede: TCP/IP, UDP, WebSocket
+Monitoramento: Real-time com detecção de anomalias
+\end{verbatim}
+
+
+\end{document}
