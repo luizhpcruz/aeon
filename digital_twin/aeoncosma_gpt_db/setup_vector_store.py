@@ -142,6 +142,7 @@ def main():
     print("🌟 AEONCOSMA Vector Store Setup")
     print("=" * 50)
     print("💡 Sistema 100% GRATUITO - Sem APIs pagas")
+    print("🧠 Nova funcionalidade: Análise Bayesiana Real implementada!")
     print()
     
     # Verificar dependências
@@ -161,7 +162,9 @@ def main():
         print("1. Execute: streamlit run streamlit_app.py")
         print("2. Acesse: http://localhost:8501")
         print("3. Teste o chat com memória contextual!")
+        print("4. 🆕 Experimente: python src\\bayesian\\mcmc_real.py")
         print("\n💡 Dica: Pergunte sobre 'status da rede' ou 'performance'")
+        print("🧠 Nova funcionalidade: Análise Bayesiana com PyMC disponível!")
     else:
         print("\n❌ Setup falhou. Verifique os erros acima.")
 

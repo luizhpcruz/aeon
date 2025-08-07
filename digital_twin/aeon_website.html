@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto AEON - Digital Twin Científico | Luiz H. P. Cruz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #e2e8f0;
+        }
+        .hero-gradient-text {
+            background: linear-gradient(135deg, #38bdf8, #63e2b7, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(99, 226, 183, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 226, 183, 0.1);
+        }
+        .feature-icon {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(99, 226, 183, 0.3));
+            border-radius: 1rem;
+            padding: 1rem;
+            display: inline-flex;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .metric-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(51, 65, 85, 0.6));
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tech-logo {
+            filter: grayscale(100%) brightness(0.8);
+            transition: all 0.3s ease;
+        }
+        .tech-logo:hover {
+            filter: grayscale(0%) brightness(1);
+            transform: scale(1.1);
+        }
+        .animated-gradient {
+            background: linear-gradient(-45deg, #38bdf8, #63e2b7, #fbbf24, #f472b6);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 20px rgba(99, 226, 183, 0.3); }
+            to { box-shadow: 0 0 40px rgba(99, 226, 183, 0.6); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-lg border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-lg animated-gradient flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">A</span>
+                        </div>
+                        <span class="text-2xl font-bold text-white">AEON</span>
+                    </div>
+                </div>
+                <nav class="hidden md:flex md:space-x-8">
+                    <a href="#overview" class="text-slate-300 hover:text-white transition duration-300">Visão Geral</a>
+                    <a href="#features" class="text-slate-300 hover:text-white transition duration-300">Funcionalidades</a>
+                    <a href="#dashboard" class="text-slate-300 hover:text-white transition duration-300">Dashboard</a>
+                    <a href="#tech" class="text-slate-300 hover:text-white transition duration-300">Tecnologias</a>
+                </nav>
+                <a href="https://github.com/luizhpcruz/aeon" target="_blank" 
+                   class="hidden md:block bg-slate-700 hover:bg-slate-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105">
+                    🚀 Ver no GitHub
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Seção Hero -->
+        <section id="hero" class="pt-32 pb-20 text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-green-900/20"></div>
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="mb-6">
+                    <span class="inline-block bg-slate-800/50 text-green-400 text-sm font-semibold px-4 py-2 rounded-full border border-green-400/30">
+                        🏆 Desenvolvido por Luiz H. P. Cruz
+                    </span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
+                    Sistema Digital Twin
+                    <span class="block hero-gradient-text mt-2">AEONCOSMA P2P</span>
+                </h1>
+                <p class="mt-8 max-w-3xl mx-auto text-xl text-slate-300 leading-relaxed">
+                    Plataforma revolucionária que integra <strong>IA Simbólica</strong>, <strong>Rede P2P</strong> descentralizada, 
+                    <strong>Criptografia Militar</strong> e <strong>Análise Cosmológica</strong> para o setor energético brasileiro.
+                </p>
+                
+                <!-- Métricas em destaque -->
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <div class="metric-card rounded-xl p-4 text-center">
+                        <div class="text-2xl font-bold text-green-400">105</div>
+                        <div class="text-sm text-slate-400">Nós P2P Ativos</div>
+                    </div>
+                    <div class="metric-card rounded-xl p-4 text-center">
+                        <div class="text-2xl font-bold text-blue-400">99.84%</div>
+                        <div class="text-sm text-slate-400">Disponibilidade</div>
+                    </div>
+                    <div class="metric-card rounded-xl p-4 text-center">
+                        <div class="text-2xl font-bold text-yellow-400">73.2</div>
+                        <div class="text-sm text-slate-400">msg/s Throughput</div>
+                    </div>
+                    <div class="metric-card rounded-xl p-4 text-center">
+                        <div class="text-2xl font-bold text-purple-400">2.1ms</div>
+                        <div class="text-sm text-slate-400">Latência Média</div>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#dashboard" 
+                       class="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white font-bold py-4 px-8 rounded-xl transition duration-300 transform hover:scale-105 pulse-glow">
+                        🎛️ Ver Dashboard
+                    </a>
+                    <a href="https://github.com/luizhpcruz/aeon" target="_blank" 
+                       class="bg-transparent border-2 border-slate-600 hover:border-slate-500 text-white font-bold py-4 px-8 rounded-xl transition duration-300 hover:bg-slate-800">
+                        📁 Acessar Código
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Visão Geral -->
+        <section id="overview" class="py-20 bg-slate-900/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white">🌟 Uma Plataforma Revolucionária</h2>
+                    <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-300">
+                        O AEON DIGITAL TWIN combina 5 tecnologias avançadas em uma única plataforma para transformar 
+                        o setor energético brasileiro com soluções de nível mundial.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="glass-card rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-white mb-3">🧠 IA Simbólica Emergente</h3>
+                            <p class="text-slate-300">Kernel evolutivo que aprende e se adapta automaticamente</p>
+                        </div>
+                        <div class="glass-card rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-white mb-3">🌐 Rede P2P Massiva</h3>
+                            <p class="text-slate-300">105 nós distribuídos com topologia híbrida Star-Mesh</p>
+                        </div>
+                        <div class="glass-card rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-white mb-3">🔒 Segurança Militar</h3>
+                            <p class="text-slate-300">AES-256-GCM + RSA-4096 + SHA3-256 quantum-ready</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <div class="glass-card rounded-2xl p-8 text-center">
+                            <div class="text-6xl mb-4">🚀</div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Pronto para ser UNICÓRNIO</h3>
+                            <p class="text-slate-300 mb-6">Potencial de mercado de R$ 500 bilhões no setor energético</p>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <div class="font-bold text-green-400">R$ 1 Bilhão</div>
+                                    <div class="text-slate-400">Projeção 5 anos</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-blue-400">2.170+</div>
+                                    <div class="text-slate-400">Equipamentos compatíveis</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Funcionalidades -->
+        <section id="features" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white">⚡ Funcionalidades Avançadas</h2>
+                    <p class="mt-6 text-xl text-slate-300">Tecnologias de ponta integradas em uma única plataforma</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- AEONCOSMA Engine -->
+                    <div class="glass-card rounded-xl p-8 text-center">
+                        <div class="feature-icon mx-auto">
+                            <svg class="w-10 h-10 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-bold text-white">AEONCOSMA Engine</h3>
+                        <p class="mt-3 text-slate-300">5 módulos integrados: IA + Crypto + P2P + Quantum + Cosmos</p>
+                        <div class="mt-4 text-sm text-green-400">27 endpoints REST funcionais</div>
+                    </div>
+
+                    <!-- Protocolo de Segurança -->
+                    <div class="glass-card rounded-xl p-8 text-center">
+                        <div class="feature-icon mx-auto">
+                            <svg class="w-10 h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-bold text-white">Protocolo AEONCOSMA-SEC-P2P</h3>
+                        <p class="mt-3 text-slate-300">Segurança militar com certificados X.509 personalizados</p>
+                        <div class="mt-4 text-sm text-red-400">0 ameaças detectadas</div>
+                    </div>
+
+                    <!-- Digital Twin UHE -->
+                    <div class="glass-card rounded-xl p-8 text-center">
+                        <div class="feature-icon mx-auto">
+                            <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-bold text-white">Digital Twin UHE</h3>
+                        <p class="mt-3 text-slate-300">Simulação de usinas hidrelétricas e subestações em tempo real</p>
+                        <div class="mt-4 text-sm text-blue-400">Compliance ANEEL/ONS</div>
+                    </div>
+
+                    <!-- Sistema VERITAS -->
+                    <div class="glass-card rounded-xl p-8 text-center">
+                        <div class="feature-icon mx-auto">
+                            <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-bold text-white">Sistema VERITAS</h3>
+                        <p class="mt-3 text-slate-300">IA + Blockchain + QR Codes para validação descentralizada</p>
+                        <div class="mt-4 text-sm text-green-400">Assinatura digital válida</div>
+                    </div>
+
+                    <!-- Análise Bayesiana -->
+                    <div class="glass-card rounded-xl p-8 text-center">
+                        <div class="feature-icon mx-auto">
+                            <svg class="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-bold text-white">Análise Bayesiana</h3>
+                        <p class="mt-3 text-slate-300">PyMC + MCMC robusto para inferência estatística avançada</p>
+                        <div class="mt-4 text-sm text-purple-400">R-hat < 1.1 convergência</div>
+                    </div>
+
+                    <!-- PINNs -->
+                    <div class="glass-card rounded-xl p-8 text-center">
+                        <div class="feature-icon mx-auto">
+                            <svg class="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-bold text-white">Physics-Informed Neural Networks</h3>
+                        <p class="mt-3 text-slate-300">Redes neurais que respeitam leis físicas fundamentais</p>
+                        <div class="mt-4 text-sm text-yellow-400">MSE < 1e-6 precisão</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Dashboard -->
+        <section id="dashboard" class="py-20 bg-slate-900/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white">📊 Dashboard Interativo</h2>
+                    <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-300">
+                        Interface Streamlit responsiva com visualizações em tempo real, métricas de performance 
+                        e controle total sobre os 7 módulos integrados.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                    <div class="glass-card rounded-xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-4">🚀 Interfaces Disponíveis</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-slate-300">Monitor P2P</span>
+                                <span class="text-green-400">:8501</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-300">API Backend</span>
+                                <span class="text-blue-400">:8000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-300">API Docs</span>
+                                <span class="text-purple-400">/docs</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-300">Jupyter</span>
+                                <span class="text-yellow-400">:8888</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-4">📈 Performance Atual</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-300">Performance</span>
+                                <span class="text-green-400 font-bold">94.3%</span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-green-400 h-2 rounded-full" style="width: 94.3%"></div>
+                            </div>
+                            <div class="flex justify-between text-sm text-slate-400">
+                                <span>Atividades: 18,426</span>
+                                <span>Uptime: 99.97%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-4">🛡️ Status de Segurança</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <span class="text-slate-300">Certificados: 105 ativos</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                                <span class="text-slate-300">Tokens: 1 ativo</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <span class="text-slate-300">Ameaças: 0 detectadas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl shadow-2xl overflow-hidden border-2 border-slate-700 bg-slate-800/50">
+                    <div class="p-6 border-b border-slate-700">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                            <span class="ml-4 text-slate-300 font-mono text-sm">localhost:8501 - AEON Dashboard</span>
+                        </div>
+                    </div>
+                    <div class="aspect-video bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-6xl mb-4">🎛️</div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Dashboard AEON</h3>
+                            <p class="text-slate-400 mb-6">Interface completa com 7 módulos integrados</p>
+                            <div class="grid grid-cols-3 gap-4 max-w-md mx-auto text-sm">
+                                <div class="bg-slate-700/50 rounded p-2">
+                                    <div class="text-green-400 font-bold">🏠 Dashboard</div>
+                                </div>
+                                <div class="bg-slate-700/50 rounded p-2">
+                                    <div class="text-blue-400 font-bold">🧠 Kernel IA</div>
+                                </div>
+                                <div class="bg-slate-700/50 rounded p-2">
+                                    <div class="text-yellow-400 font-bold">🏭 UHE Twin</div>
+                                </div>
+                                <div class="bg-slate-700/50 rounded p-2">
+                                    <div class="text-purple-400 font-bold">📋 SSMA Docs</div>
+                                </div>
+                                <div class="bg-slate-700/50 rounded p-2">
+                                    <div class="text-cyan-400 font-bold">💬 Chat Test</div>
+                                </div>
+                                <div class="bg-slate-700/50 rounded p-2">
+                                    <div class="text-red-400 font-bold">🛡️ VERITAS</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Tecnologias -->
+        <section id="tech" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white">🛠️ Stack Tecnológico</h2>
+                    <p class="mt-6 text-xl text-slate-300">Tecnologias modernas para máxima performance e confiabilidade</p>
+                </div>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                    <div class="flex flex-col items-center space-y-3 group">
+                        <div class="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/50 transition-all duration-300">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="w-10 h-10 tech-logo" alt="Python"/>
+                        </div>
+                        <span class="text-slate-300 font-medium">Python 3.13</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-3 group">
+                        <div class="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/50 transition-all duration-300">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" class="w-10 h-10 tech-logo" alt="FastAPI"/>
+                        </div>
+                        <span class="text-slate-300 font-medium">FastAPI</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-3 group">
+                        <div class="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/50 transition-all duration-300">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" class="w-10 h-10 tech-logo" alt="PyTorch"/>
+                        </div>
+                        <span class="text-slate-300 font-medium">PyTorch</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-3 group">
+                        <div class="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/50 transition-all duration-300">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" class="w-10 h-10 tech-logo" alt="NumPy"/>
+                        </div>
+                        <span class="text-slate-300 font-medium">NumPy</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-3 group">
+                        <div class="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/50 transition-all duration-300">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" class="w-10 h-10 tech-logo" alt="Pandas"/>
+                        </div>
+                        <span class="text-slate-300 font-medium">Pandas</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-3 group">
+                        <div class="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/50 transition-all duration-300">
+                            <svg class="w-10 h-10 text-cyan-400 tech-logo" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-.815 5.123c.631-.24 1.315-.123 1.832.313l5.104 4.302c.517.435.517 1.149 0 1.584l-5.104 4.302c-.517.436-1.201.553-1.832.313-.631-.24-1.185-.84-1.185-1.604V6.727c0-.764.554-1.364 1.185-1.604z"/>
+                            </svg>
+                        </div>
+                        <span class="text-slate-300 font-medium">Streamlit</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-3 group">
+                        <div class="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/50 transition-all duration-300">
+                            <svg class="w-10 h-10 text-green-400 tech-logo" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.4c5.302 0 9.6 4.298 9.6 9.6s-4.298 9.6-9.6 9.6S2.4 17.302 2.4 12 6.698 2.4 12 2.4z"/>
+                            </svg>
+                        </div>
+                        <span class="text-slate-300 font-medium">Plotly</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-3 group">
+                        <div class="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/50 transition-all duration-300">
+                            <svg class="w-10 h-10 text-red-400 tech-logo" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <span class="text-slate-300 font-medium">Cryptography</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-3 group">
+                        <div class="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/50 transition-all duration-300">
+                            <svg class="w-10 h-10 text-purple-400 tech-logo" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0L2.5 6v12L12 24l9.5-6V6L12 0z"/>
+                            </svg>
+                        </div>
+                        <span class="text-slate-300 font-medium">PyMC</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-3 group">
+                        <div class="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/50 transition-all duration-300">
+                            <svg class="w-10 h-10 text-yellow-400 tech-logo" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <span class="text-slate-300 font-medium">Jupyter</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-3 group">
+                        <div class="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/50 transition-all duration-300">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="w-10 h-10 tech-logo" alt="Git"/>
+                        </div>
+                        <span class="text-slate-300 font-medium">Git</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-3 group">
+                        <div class="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/50 transition-all duration-300">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" class="w-10 h-10 tech-logo" alt="VS Code"/>
+                        </div>
+                        <span class="text-slate-300 font-medium">VS Code</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Autor -->
+        <section class="py-20 bg-slate-900/50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="glass-card rounded-2xl p-12">
+                    <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500 to-green-500 flex items-center justify-center text-3xl font-bold text-white">
+                        LHC
+                    </div>
+                    <h2 class="text-3xl font-bold text-white mb-4">👨‍💻 Luiz H. P. Cruz</h2>
+                    <p class="text-xl text-slate-300 mb-6">
+                        Desenvolvedor Full-Stack & Cientista de Dados
+                    </p>
+                    <p class="text-slate-400 mb-8 max-w-2xl mx-auto">
+                        Criador do projeto AEON Digital Twin. Especialista em IA, sistemas distribuídos e criptografia avançada. 
+                        Desenvolveu toda a plataforma de forma autônoma em 6 meses, demonstrando capacidade técnica excepcional.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-400">6 meses</div>
+                            <div class="text-sm text-slate-400">Desenvolvimento Solo</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-green-400">5 módulos</div>
+                            <div class="text-sm text-slate-400">Tecnologias Integradas</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-purple-400">105 nós</div>
+                            <div class="text-sm text-slate-400">Rede P2P Testada</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center space-x-4">
+                        <a href="https://github.com/luizhpcruz" target="_blank" 
+                           class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg transition duration-300 flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://linkedin.com/in/luizhpcruz" target="_blank" 
+                           class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition duration-300 flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-700">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg animated-gradient flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">A</span>
+                        </div>
+                        <span class="text-2xl font-bold text-white">AEON Digital Twin</span>
+                    </div>
+                    <p class="text-slate-400 max-w-md">
+                        Plataforma revolucionária de Digital Twin para o setor energético brasileiro, 
+                        integrando IA, P2P, criptografia militar e análise cosmológica.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-4">🔗 Links</h3>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><a href="#overview" class="hover:text-white transition">Visão Geral</a></li>
+                        <li><a href="#features" class="hover:text-white transition">Funcionalidades</a></li>
+                        <li><a href="#dashboard" class="hover:text-white transition">Dashboard</a></li>
+                        <li><a href="#tech" class="hover:text-white transition">Tecnologias</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-4">📊 Status</h3>
+                    <ul class="space-y-2 text-slate-400">
+                        <li class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <span>Sistema Online</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <span>105 Nós Ativos</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <span>99.84% Uptime</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <span>0 Ameaças</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-slate-700">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-slate-500">&copy; 2025 AEON Digital Twin by Luiz H. P. Cruz. Todos os direitos reservados.</p>
+                    <div class="mt-4 md:mt-0 flex space-x-6">
+                        <a href="https://github.com/luizhpcruz/aeon" target="_blank" class="text-slate-400 hover:text-white transition">
+                            <span class="sr-only">GitHub</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para smooth scrolling -->
+    <script>
+        // Smooth scrolling para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animação de contadores
+        function animateCounters() {
+            const counters = document.querySelectorAll('.metric-card .text-2xl');
+            counters.forEach(counter => {
+                const target = parseFloat(counter.textContent);
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target % 1 === 0 ? target : target.toFixed(2);
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = current % 1 === 0 ? Math.floor(current) : current.toFixed(2);
+                    }
+                }, 30);
+            });
+        }
+
+        // Iniciar animações quando a página carregar
+        window.addEventListener('load', () => {
+            setTimeout(animateCounters, 1000);
+        });
+    </script>
+
+</body>
+</html>

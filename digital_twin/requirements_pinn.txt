@@ -1,0 +1,43 @@
+# Requisitos para Physics-Informed Neural Networks (PINNs) - Projeto AEON
+# Este arquivo lista as dependências necessárias para executar os módulos PINN
+
+# Deep Learning Framework
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Computação científica
+numpy>=1.24.0
+scipy>=1.10.0
+pandas>=2.0.0
+
+# Visualização (opcional - pode dar erro em alguns ambientes)
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Análise Bayesiana (integração com mcmc_real.py)
+pymc>=5.0.0
+arviz>=0.15.0
+
+# Utilidades
+pathlib2>=2.3.0
+logging
+json
+datetime
+
+# Ambiente científico (opcional)
+jupyter>=1.0.0
+ipykernel>=6.0.0
+
+# Para desenvolvimento
+pytest>=7.0.0
+black>=23.0.0
+isort>=5.0.0
+
+# Comentários sobre instalação:
+# pip install torch numpy scipy pandas matplotlib pymc arviz
+# 
+# Para ambiente sem GUI (servidores):
+# pip install torch numpy scipy pandas pymc arviz --no-deps matplotlib
+#
+# Para GPU (CUDA):
+# pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118

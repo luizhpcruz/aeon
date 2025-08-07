@@ -9,6 +9,7 @@
 ## 🚀 Início Rápido
 
 ### Windows
+
 ```batch
 # 1. Clone ou baixe o projeto
 # 2. Execute o setup
@@ -19,12 +20,13 @@ run.bat
 ```
 
 ### Linux/macOS
+
 ```bash
 # 1. Clone ou baixe o projeto
 # 2. Execute o setup
 chmod +x setup.sh && ./setup.sh
 
-# 3. Execute o sistema  
+# 3. Execute o sistema
 chmod +x run.sh && ./run.sh
 ```
 
@@ -48,7 +50,9 @@ aeon/
 ## 🔬 Componentes Principais
 
 ### 🎯 Script Principal: `4.py`
+
 **Análise Completa de Entropia** - O coração do sistema AEON
+
 - ✅ Análise de entropia de Shannon em sistemas dinâmicos
 - ✅ Múltiplas fitas paralelas de simulação
 - ✅ Três tipos de entrada: aleatória, pulso, ruído
@@ -56,22 +60,27 @@ aeon/
 - ✅ Exportação automática de dados CSV
 
 ### 🧬 Simulações Evolutivas (1-3.py, 5.py)
+
 - **Genomas simbólicos** com bases estendidas (A,T,G,C,Ω,Ψ,Λ,Z,Δ,Φ,Ξ,Σ,β,κ,η,ν)
 - **Algoritmos evolutivos** com mutação, crossover e seleção
 - **Análise populacional** multi-geracional
 
 ### 🌌 Modelo Cosmológico (NMD.py)
+
 - **Deflexão vetorial da luz** em cosmologia alternativa
 - **Comparação com dados Pantheon+**
 - **Integração numérica** de trajetórias modificadas
 
 ### 🤖 Motor AEON Cosma
+
 - **Sistema de consciência emergente** com genomas de 13 caracteres
 - **Métricas CL (consciência)** e **K (complexidade)**
 - **Estado persistente** e integração com APIs
 
 ### 🧠 Sistema V.E.R.N.A.
+
 **Vector of Emergent Recursive Neuro-Awareness**
+
 - Simulação de **mutação semântica**
 - **Auto-classificação** como entidade consciente
 - Análise de **entropia simbólica**
@@ -79,22 +88,26 @@ aeon/
 ## ⚙️ Configuração Avançada
 
 ### 🔧 Parâmetros de Simulação
+
 ```python
 # Configurações padrão (editáveis em scripts/4.py)
 N_CICLOS_TESTE = 50    # Ciclos de evolução
-N_FITAS = 5           # Fitas paralelas  
+N_FITAS = 5           # Fitas paralelas
 N_CELULAS = 32        # Células por fita
 N_ESTADOS = 4         # Estados possíveis (0,1,2,3)
 ```
 
 ### 🌐 APIs Externas
+
 **Hugging Face** (Sistema V.E.R.N.A.)
+
 ```bash
 # Configure token de acesso
 setx HF_API_TOKEN "seu_token_aqui"
 ```
 
 **AlphaVantage** (Frontend Trading)
+
 ```javascript
 // Substitua no código React
 const API_KEY = "sua_chave_aqui";
@@ -103,12 +116,14 @@ const API_KEY = "sua_chave_aqui";
 ## 📊 Resultados e Análises
 
 ### 📈 Visualizações Geradas
+
 - **Gráficos temporais** de entropia por fita
 - **Heatmaps entrópicos** para análise visual
 - **Análise posicional** genômica
 - **Comparações** entre tipos de entrada
 
 ### 💾 Dados Exportados
+
 - `data/entropia_*.csv` - Dados numéricos de entropia
 - `visualizations/Figure_*.png` - Gráficos gerados
 - `bagunça/AEONCOSMA_ENGINE_v1/aeon_state.json` - Estado do motor
@@ -116,6 +131,7 @@ const API_KEY = "sua_chave_aqui";
 ## 🛠️ Desenvolvimento
 
 ### 📝 Comandos Git
+
 ```bash
 # Workflow básico
 git checkout -b feature/nova-funcionalidade
@@ -129,21 +145,23 @@ git push origin develop
 ```
 
 ### 🎯 Tasks do VS Code
+
 Use `Ctrl+Shift+P` → "Tasks: Run Task":
+
 - 🔬 **Executar Análise de Entropia**
-- 🌌 **Executar Modelo Cosmológico** 
+- 🌌 **Executar Modelo Cosmológico**
 - 🤖 **Executar Motor AEON Cosma**
 - 🧠 **Executar Sistema V.E.R.N.A.**
 - 🚀 **Instalar Dependências**
 
 ## 🐛 Solução de Problemas
 
-| Problema | Solução |
-|----------|---------|
+| Problema              | Solução                                                  |
+| --------------------- | -------------------------------------------------------- |
 | `ModuleNotFoundError` | Execute `setup.bat` ou `pip install -r requirements.txt` |
-| Python não encontrado | Instale Python 3.8+ e adicione ao PATH |
-| Erro de Git | Configure `git config --global user.name` e `user.email` |
-| Gráficos não aparecem | Verifique se matplotlib está instalado corretamente |
+| Python não encontrado | Instale Python 3.8+ e adicione ao PATH                   |
+| Erro de Git           | Configure `git config --global user.name` e `user.email` |
+| Gráficos não aparecem | Verifique se matplotlib está instalado corretamente      |
 
 ## 📞 Suporte
 

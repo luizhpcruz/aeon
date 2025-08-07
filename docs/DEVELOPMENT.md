@@ -3,6 +3,7 @@
 ## Configuração do Ambiente
 
 ### 1. Primeira execução
+
 ```bash
 # Windows
 setup.bat
@@ -12,6 +13,7 @@ setup.bat
 ```
 
 ### 2. Execução rápida
+
 ```bash
 # Windows
 run.bat
@@ -23,12 +25,14 @@ run.bat
 ## Estrutura de Arquivos
 
 ### Scripts Principais
+
 - `scripts/4.py` - **Análise completa de entropia** (mais importante)
   - Gera visualizações de entropia temporal
   - Cria heatmaps e gráficos comparativos
   - Exporta dados em CSV
 
 ### Módulos Especializados
+
 - `bagunça/AEONCOSMA_ENGINE_v1/` - Motor principal do sistema AEON
 - `teoria/verna.py` - Sistema V.E.R.N.A. de consciência emergente
 - `frontend/` - Interface web React com trading viewer
@@ -36,6 +40,7 @@ run.bat
 ## Comandos Git Úteis
 
 ### Workflow básico
+
 ```bash
 # Criar nova feature
 git checkout -b feature/nova-funcionalidade
@@ -53,6 +58,7 @@ git merge feature/nova-funcionalidade
 ```
 
 ### Sincronização
+
 ```bash
 # Atualizar repositório local
 git pull origin develop
@@ -74,11 +80,13 @@ Use `Ctrl+Shift+P` e digite "Tasks: Run Task" para executar:
 ## Debugging
 
 ### Problemas comuns
+
 1. **ModuleNotFoundError**: Execute `pip install -r requirements.txt`
 2. **Python não encontrado**: Verifique se Python está no PATH
 3. **Git erro**: Configure `git config --global user.name` e `user.email`
 
 ### Logs e outputs
+
 - Gráficos salvos em `visualizations/`
 - Dados em `data/`
 - Estados do AEON em `bagunça/AEONCOSMA_ENGINE_v1/aeon_state.json`
@@ -93,6 +101,7 @@ Use `Ctrl+Shift+P` e digite "Tasks: Run Task" para executar:
 ## Parâmetros de Configuração
 
 ### Simulação de Entropia
+
 ```python
 N_CICLOS_TESTE = 50    # Ciclos de evolução
 N_FITAS = 5           # Fitas paralelas
@@ -101,6 +110,7 @@ N_ESTADOS = 4         # Estados possíveis
 ```
 
 ### Motor AEON
+
 - Genomas de 13 caracteres
 - Mutação baseada em regras específicas
 - Estado persistente em JSON

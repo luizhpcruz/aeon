@@ -1,0 +1,44 @@
+{
+  "timestamp": "2025-08-03T15:03:45.305675",
+  "total_files": 3,
+  "total_size_kb": 63.7333984375,
+  "files": [
+    {
+      "filename": "aeoncosma_infrastructure_20250803_150205.dxf",
+      "size_kb": 14.37890625,
+      "modified": "2025-08-03T15:02:05.779748"
+    },
+    {
+      "filename": "aeoncosma_logical_diagram_20250803_150205.dxf",
+      "size_kb": 12.8896484375,
+      "modified": "2025-08-03T15:02:05.782761"
+    },
+    {
+      "filename": "aeoncosma_network_20250803_145528.dxf",
+      "size_kb": 36.46484375,
+      "modified": "2025-08-03T14:55:28.030715"
+    }
+  ],
+  "network_data": {
+    "total_nodes": 105,
+    "hub_nodes": 10,
+    "standard_nodes": 95,
+    "connections": 1131,
+    "throughput": "72.6 msg/s",
+    "availability": "100%"
+  },
+  "technical_specs": {
+    "format": "DXF (Drawing Exchange Format)",
+    "autocad_version": "AutoCAD 2000 (AC1015)",
+    "units": "Millimeters",
+    "coordinate_system": "World Coordinate System (WCS)",
+    "color_system": "AutoCAD Color Index (ACI)"
+  },
+  "applications": [
+    "Infrastructure planning",
+    "Technical documentation",
+    "Professional presentations",
+    "Operation and maintenance",
+    "Network expansion planning"
+  ]
+}

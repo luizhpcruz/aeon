@@ -1,0 +1,43 @@
+{
+  "timestamp": "2025-08-03T13:36:36.509930",
+  "bayesian_analysis": {
+    "mu_posterior": {
+      "mean": 4.504508414653574,
+      "std": 0.09882185106289078,
+      "ci_95": [
+        4.313344516853897,
+        4.7056239338434604
+      ]
+    },
+    "sigma_posterior": {
+      "mean": 0.5996778749192313,
+      "std": 0.050255134063528384,
+      "ci_95": [
+        0.5014880791725266,
+        0.6977184088834898
+      ]
+    }
+  },
+  "pinn_performance": {
+    "r2": 0.9698306837053419,
+    "mse": 0.0015804007153864968,
+    "rmse": 0.03975425405395625,
+    "points": 200
+  },
+  "uncertainty_quantification": {
+    "average_total_uncertainty": 0.5997908918178512,
+    "epistemic_component": 0.5996778749192313,
+    "aleatory_component_avg": 0.006976018730399067,
+    "band_widths": {
+      "68%": 1.1995817836357023,
+      "95%": 2.3511802959259764,
+      "99.7%": 3.598745350907107
+    }
+  },
+  "integration_quality": {
+    "bayesian_pinn_coupling": "Functional",
+    "uncertainty_propagation": "Complete",
+    "visualization_quality": "High-resolution",
+    "scientific_validity": "Validated"
+  }
+}
