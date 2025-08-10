@@ -1,26 +1,30 @@
-# Core scientific computing
-numpy>=1.21.0
-matplotlib>=3.5.0
-seaborn>=0.11.0
-pandas>=1.3.0
-scipy>=1.7.0
+#############################
+# AEON Minimal MVP Requirements
+# Mantido intencionalmente enxuto para rodar:
+#  - teste_entropia.py
+#  - teste_simples.py (V.E.R.N.A.)
+#  - teste_cosmologia.py
+#  - teste_aeon_cosma.py
+#  - aeon_dashboard.py (Streamlit)
+#############################
 
-# Visualization and plotting
-plotly>=5.0.0
+numpy>=1.25.0
+pandas>=2.0.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+plotly>=5.20.0
+streamlit>=1.36.0
 
-# Web framework and API
-fastapi>=0.70.0
-uvicorn>=0.15.0
-jinja2>=3.0.0
+# Comentado (adicionar quando avançar para APIs / modelos):
+# fastapi
+# uvicorn
+# jinja2
+# requests
+# scipy            # apenas se necessário para versão completa de cosmologia
+# python-dotenv
 
-# HTTP requests and data fetching
-requests>=2.26.0
+# Dev (opcionais) - descomentando conforme necessidade
+# pytest
+# black
+# flake8
 
-# Additional utilities
-collections-extended>=2.0.0
-python-dotenv>=0.19.0
-
-# Development and testing
-pytest>=6.0.0
-black>=21.0.0
-flake8>=4.0.0

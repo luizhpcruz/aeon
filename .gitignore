@@ -39,6 +39,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+# Excluir ambiente Python externo opcional
+python_env/
 
 # IDE
 .vscode/
@@ -186,6 +188,7 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
 
 # React build
 build/
@@ -232,3 +235,6 @@ Thumbs.db
 aeon_state.json
 *.csv
 Figure_*.png
+logs/
+cache/
+tmp/
