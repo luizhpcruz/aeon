@@ -235,6 +235,26 @@ Thumbs.db
 aeon_state.json
 *.csv
 Figure_*.png
+*.json
+*.npy
+*.npz
+*.zip
+*.gz
+*.pdf
+*.dxf
+*.ipynb
+logs/
+archive/
+advanced/
+data/
+visualizations/
+aeon_model_export/
+aeon_historico/
+AEONCOSMA_WINDOWS_PACKAGE/
+aeoncosma_simulation_bundle/
+Digital Twin/
+GovTech/
+IA p2p trader/
 logs/
 cache/
 tmp/
