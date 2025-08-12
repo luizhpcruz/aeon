@@ -14,12 +14,16 @@ import logging
 import argparse
 
 
-def executar_sistema(nome, arquivo, descricao, timeout, retries, logger):
-    """Executa um sistema AEON com robustez (retries, timeout, logs)"""
-    print(f"\n🔄 EXECUTANDO: {nome}")
-    print(f"📄 Arquivo: {arquivo}")
-    print(f"📋 Descrição: {descricao}")
-    print("=" * 60)
+def executar_sistema(nome, arquivo, descricao, timeout, retries, logger, quiet: bool = False):
+    """Executa um sistema AEON com robustez (retries, timeout, logs).
+
+    Quando quiet=True, minimiza saídas no console (mantém logs e relatório).
+    """
+    if not quiet:
+        print(f"\n🔄 EXECUTANDO: {nome}")
+        print(f"📄 Arquivo: {arquivo}")
+        print(f"📋 Descrição: {descricao}")
+        print("=" * 60)
 
     if not os.path.exists(arquivo):
         msg = f"Arquivo não encontrado: {arquivo}"
@@ -42,20 +46,24 @@ def executar_sistema(nome, arquivo, descricao, timeout, retries, logger):
             duracao = time.time() - inicio
 
             if result.returncode == 0:
-                print(f"✅ {nome} - SUCESSO ({duracao:.1f}s) [tentativa {attempts}]")
+                if not quiet:
+                    print(f"✅ {nome} - SUCESSO ({duracao:.1f}s) [tentativa {attempts}]")
                 logger.info(f"{nome} OK em {duracao:.1f}s")
                 return True, duracao, attempts, result.stdout, ""
             else:
                 last_err = (result.stderr or result.stdout or "").strip()
-                print(f"❌ {nome} - ERRO (tentativa {attempts}): {last_err[:200]}")
+                if not quiet:
+                    print(f"❌ {nome} - ERRO (tentativa {attempts}): {last_err[:200]}")
                 logger.warning(f"{nome} falhou (tentativa {attempts}): {last_err[:200]}")
         except subprocess.TimeoutExpired:
             last_err = f"Timeout >{timeout}s"
-            print(f"⏰ {nome} - TIMEOUT (>{timeout}s) [tentativa {attempts}]")
+            if not quiet:
+                print(f"⏰ {nome} - TIMEOUT (>{timeout}s) [tentativa {attempts}]")
             logger.warning(f"{nome} timeout (tentativa {attempts})")
         except Exception as e:
             last_err = str(e)
-            print(f"💥 {nome} - EXCEÇÃO: {last_err}")
+            if not quiet:
+                print(f"💥 {nome} - EXCEÇÃO: {last_err}")
             logger.error(f"{nome} exceção (tentativa {attempts}): {last_err}")
 
         if attempts <= retries:
@@ -123,16 +131,31 @@ def main():
     parser.add_argument("--log", type=str, default="aeon_launcher.log", help="Arquivo de log")
     parser.add_argument("--report", type=str, default="aeon_report.json", help="Relatório JSON")
     parser.add_argument("--config", type=str, help="JSON com lista de sistemas")
+    parser.add_argument("--quiet", action="store_true", help="Minimiza saídas no console (apenas resumo)")
+    parser.add_argument("--only", nargs="*", help="Apenas sistemas que contenham estes termos (nome/arquivo)")
+    parser.add_argument("--skip", nargs="*", help="Ignorar sistemas que contenham estes termos (nome/arquivo)")
     args = parser.parse_args()
 
     logger = _setup_logger(args.log)
 
-    print("🌟 AEON INTEGRATED LAUNCHER")
-    print(f"⏰ Iniciado em: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print("=" * 70)
+    # Permitir forçar quiet via variável de ambiente
+    if os.getenv("AEON_QUIET", "").strip().lower() in {"1", "true", "yes", "on"}:
+        args.quiet = True
+
+    if not args.quiet:
+        print("🌟 AEON INTEGRATED LAUNCHER")
+        print(f"⏰ Iniciado em: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        print("=" * 70)
 
     # Sistemas para executar (pode vir de um JSON)
     sistemas = _carregar_sistemas(args.config)
+    # Filtragem opcional
+    if args.only:
+        termos = [t.lower() for t in args.only]
+        sistemas = [s for s in sistemas if any(t in (s[0].lower()+" "+s[1].lower()) for t in termos)]
+    if args.skip:
+        termos = [t.lower() for t in args.skip]
+        sistemas = [s for s in sistemas if not any(t in (s[0].lower()+" "+s[1].lower()) for t in termos)]
 
     resultados = []
     relatorio = []
@@ -140,7 +163,7 @@ def main():
     # Executar cada sistema
     for nome, arquivo, descricao in sistemas:
         sucesso, duracao, tentativas, stdout, err = executar_sistema(
-            nome, arquivo, descricao, timeout=args.timeout, retries=args.retries, logger=logger
+            nome, arquivo, descricao, timeout=args.timeout, retries=args.retries, logger=logger, quiet=args.quiet
         )
         resultados.append((nome, sucesso))
         relatorio.append({
@@ -155,27 +178,33 @@ def main():
         time.sleep(args.pause)
 
     # Relatório final
-    print("\n" + "=" * 70)
-    print("🎯 RELATÓRIO FINAL DE EXECUÇÃO")
-    print("=" * 70)
+    if not args.quiet:
+        print("\n" + "=" * 70)
+        print("🎯 RELATÓRIO FINAL DE EXECUÇÃO")
+        print("=" * 70)
 
     sucessos = 0
     for nome, sucesso in resultados:
-        status = "✅ SUCESSO" if sucesso else "❌ FALHA"
-        print(f"{nome}: {status}")
+        if not args.quiet:
+            status = "✅ SUCESSO" if sucesso else "❌ FALHA"
+            print(f"{nome}: {status}")
         if sucesso:
             sucessos += 1
 
     taxa_sucesso = (sucessos / len(sistemas)) * 100
-    print(f"\n📊 Taxa de Sucesso: {sucessos}/{len(sistemas)} ({taxa_sucesso:.1f}%)")
-
-    if taxa_sucesso >= 75:
-        print("🎉 ECOSSISTEMA AEON: OPERACIONAL")
-        print("✓ Sistemas principais funcionando")
-        print("✓ Pronto para próxima fase")
+    if args.quiet:
+        # Saída compacta
+        print(f"✅ Sucessos: {sucessos}/{len(sistemas)} | Taxa: {taxa_sucesso:.1f}%")
     else:
-        print("🔧 ECOSSISTEMA AEON: REQUER AJUSTES")
-        print("⚠️ Alguns sistemas precisam correção")
+        print(f"\n📊 Taxa de Sucesso: {sucessos}/{len(sistemas)} ({taxa_sucesso:.1f}%)")
+
+        if taxa_sucesso >= 75:
+            print("🎉 ECOSSISTEMA AEON: OPERACIONAL")
+            print("✓ Sistemas principais funcionando")
+            print("✓ Pronto para próxima fase")
+        else:
+            print("� ECOSSISTEMA AEON: REQUER AJUSTES")
+            print("⚠️ Alguns sistemas precisam correção")
 
     # Salva relatório estruturado (para CI/observabilidade)
     try:
@@ -184,11 +213,13 @@ def main():
                 {"executado_em": datetime.now().isoformat(), "resultados": relatorio},
                 f, ensure_ascii=False, indent=2
             )
-        print(f"\n📝 Relatório salvo em: {args.report}")
+        if not args.quiet:
+            print(f"\n📝 Relatório salvo em: {args.report}")
     except Exception as e:
         logger.warning(f"Falha ao salvar relatório: {e}")
 
-    print(f"\n🏁 Execução concluída em: {datetime.now().strftime('%H:%M:%S')}")
+    if not args.quiet:
+        print(f"\n🏁 Execução concluída em: {datetime.now().strftime('%H:%M:%S')}")
     # Código de saída: 0 se todos sucesso; 1 se houve falhas
     return 0 if sucessos == len(sistemas) else 1
 

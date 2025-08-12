@@ -1,0 +1,471 @@
+#!/usr/bin/env python3
+# ai_synthetic_mind_dsl.py
+
+import numpy as np
+import random
+import matplotlib.pyplot as plt
+from scipy.integrate import quad
+from scipy.stats import entropy
+from scipy.fft import rfft
+from joblib import Parallel, delayed
+import requests
+
+##############################################
+# MODULE 1: COSMOLOGY - CosmoHybrid
+##############################################
+
+class CosmoHybrid:
+    def __init__(self, H0=70.4, Om=0.303, Ol=0.697):
+        self.H0 = H0
+        self.Om = Om
+        self.Ol = Ol
+
+    def E(self, z):
+        """Parâmetro de Hubble dimensionalizado."""
+        return np.sqrt(self.Om * (1 + z)**3 + self.Ol)
+
+    def H(self, z):
+        """Calcula o parâmetro de Hubble em um dado redshift z."""
+        return self.H0 * self.E(z)
+
+    def D_L(self, z):
+        """Calcula a distância de luminosidade."""
+        I, _ = quad(lambda zp: 1 / self.E(zp), 0, z)
+        c = 299792.458  # km/s
+        return (c / self.H0) * (1 + z) * I
+
+    def simulate_universe(self, z_max=1.0):
+        """
+        Simula a evolução do universo para z de 0 até z_max.
+        Retorna o valor final de H(z) para simplificar a métrica de sucesso.
+        """
+        zs = np.linspace(0, z_max, 100)
+        Hs = [self.H(z) for z in zs]
+        DLs = [self.D_L(z) for z in zs]
+        # Retornamos o último H(z) como uma métrica de "sucesso"
+        # Um modelo mais complexo poderia avaliar a consistência com dados observacionais
+        return Hs[-1] 
+
+##############################################
+# MODULE 2: EXOPLANETS - ExoSimulator
+##############################################
+
+class ExoSimulator:
+    def __init__(self):
+        pass
+
+    def simulate_spectrum(self, T0=1500, alpha=0.1):
+        """
+        Simulação fictícia de espectro atmosférico.
+        Retorna o fluxo médio como métrica de sucesso.
+        """
+        wl = np.linspace(0.6, 5.0, 200)  # comprimento de onda em microns
+        flux = T0 * np.exp(-alpha * (wl - 2.5)**2)
+        # Retornamos o fluxo médio como uma métrica de "sucesso"
+        return np.mean(flux)
+
+##############################################
+# MODULE 3: QUANTUM ENCRYPTION - EvolveKey
+##############################################
+
+def generate_population(base, N=100, noise=0.01):
+    """Gera uma população inicial de chaves com ruído."""
+    return [base + np.random.normal(0, noise, base.shape) for _ in range(N)]
+
+def fitness_key(vec):
+    """
+    Define a fitness da chave com base na entropia da distribuição dos valores.
+    Maior entropia = melhor aleatoriedade (mais segurança).
+    """
+    counts, _ = np.histogram(vec, bins=50, density=True)
+    return entropy(counts + 1e-8)
+
+def evolve_key(base, generations=50, pop_size=100, n_jobs=4):
+    """
+    Evolve uma população de chaves usando um algoritmo genético.
+    Retorna a melhor chave encontrada e estatísticas de fitness.
+    """
+    pop = generate_population(base, N=pop_size)
+    stats = {'best': [], 'mean': [], 'std': []}
+    for g in range(generations):
+        # Calcula fitness em paralelo
+        fits = Parallel(n_jobs=n_jobs)(delayed(fitness_key)(p) for p in pop)
+        fits = np.array(fits)
+        
+        # Seleção de elite (top 50%)
+        idx = np.argsort(fits)[-pop_size//2:]
+        parents = [pop[i] for i in idx]
+        
+        new_pop = []
+        # Crossover
+        for i in range(0, len(parents), 2):
+            if i + 1 < len(parents):
+                p1, p2 = parents[i], parents[i+1]
+                mid = len(p1) // 2
+                child = np.concatenate([p1[:mid], p2[mid:]])
+                new_pop.append(child)
+        
+        # Mutação
+        new_pop += [p + np.random.normal(0, 0.005, p.shape) for p in parents]
+        
+        # Preenche a população se necessário
+        while len(new_pop) < pop_size:
+            new_pop.append(base + np.random.normal(0, 0.01, base.shape))
+        pop = new_pop[:pop_size] # Garante o tamanho correto da população
+        
+        stats['best'].append(np.max(fits))
+        stats['mean'].append(np.mean(fits))
+        stats['std'].append(np.std(fits))
+        print(f"Key Evolution Gen {g+1}/{generations} - Best Fitness: {stats['best'][-1]:.4f}")
+    
+    # Retorna a melhor chave da última geração
+    best_idx = np.argmax(fits) 
+    return pop[best_idx], stats
+
+##############################################
+# MODULE 4: COMMUNICATION QUÂNTICA (Placeholder)
+##############################################
+
+def quantum_send(data):
+    """Simula envio seguro via canal quântico."""
+    print("Enviando dados com segurança quântica...")
+    return data
+
+def quantum_receive():
+    """Simula recebimento seguro via canal quântico."""
+    print("Recebendo dados com segurança quântica...")
+    return "Dados recebidos"
+
+##############################################
+# MODULE 5: COSMIC DNA / MENTE SINTÉTICA
+##############################################
+
+COSMIC_ALPHABET = ['A', 'T', 'C', 'G', 'Ω', 'Δ']
+
+def generate_cosmic_dna(length=128):
+    """Gera uma sequência aleatória de DNA cósmico."""
+    return [random.choice(COSMIC_ALPHABET) for _ in range(length)]
+
+def mutate_dna(dna, mutation_rate=0.05):
+    """Aplica mutações aleatórias na sequência de DNA."""
+    return [random.choice(COSMIC_ALPHABET) if random.random() < mutation_rate else base for base in dna]
+
+def crossover_dna(dna1, dna2):
+    """Realiza crossover entre duas sequências de DNA."""
+    point = random.randint(1, len(dna1) - 1)
+    return dna1[:point] + dna2[point:]
+
+class CosmicDNAChain:
+    def __init__(self, length=128, population_size=100):
+        self.length = length
+        self.population_size = population_size
+        self.population = [generate_cosmic_dna(self.length) for _ in range(self.population_size)]
+        self.best_strategy = None
+        self.best_fitness = -np.inf
+
+    # evaluate_dna agora recebe feedback externo
+    def evaluate_dna(self, dna, external_feedback_metric=None):
+        """
+        Fitness da estratégia de DNA baseada na entropia (diversidade)
+        e, opcionalmente, em um feedback de desempenho externo.
+        """
+        # 1. Componente de entropia (diversidade intrínseca do DNA)
+        counts = {base: dna.count(base) for base in COSMIC_ALPHABET}
+        freqs = np.array(list(counts.values())) / len(dna)
+        # Adiciona um pequeno valor para evitar log de zero
+        entropy_fitness = -np.sum(freqs * np.log2(freqs + 1e-8)) 
+
+        # 2. Componente de feedback externo (desempenho da IA nos módulos)
+        feedback_component = 0.0
+        if external_feedback_metric is not None:
+            # Normalização simples: assumimos que 100 é um valor de referência
+            # Isso é um ponto para futuras melhorias/pesquisa profunda:
+            # como normalizar e pesar as métricas de forma mais robusta?
+            feedback_component = external_feedback_metric / 100.0 
+            
+            # Garante que o feedback não seja negativo se a métrica externa for muito baixa
+            # E adiciona um fator para dar mais peso se necessário
+            feedback_component = max(0, feedback_component) * 0.5 # Exemplo de peso
+
+        # Aptidão combinada
+        # Pode ser soma, multiplicação, etc. Depende da relação desejada.
+        # Aqui, uma soma simples, onde a diversidade é a base e o feedback externo a aprimora.
+        combined_fitness = entropy_fitness + feedback_component
+        
+        return combined_fitness
+
+    # evolve agora aceita feedback externo
+    def evolve(self, generations=50, mutation_rate=0.05, external_feedback_metric=None):
+        """
+        Evolve a população de DNA Cósmico.
+        O external_feedback_metric (da combined_metric do SyntheticMindSystem)
+        influencia a aptidão de cada sequência de DNA.
+        """
+        for gen in range(generations):
+            fitnesses = []
+            # Cada DNA é avaliado levando em conta o feedback externo
+            for dna in self.population:
+                fitnesses.append(self.evaluate_dna(dna, external_feedback_metric))
+            
+            fitnesses = np.array(fitnesses)
+            
+            # Elitismo: seleciona os melhores para a próxima geração
+            elitism = sorted(zip(self.population, fitnesses), key=lambda x: x[1], reverse=True)[:self.population_size // 2]
+            
+            # Atualiza a melhor estratégia geral
+            if elitism and elitism[0][1] > self.best_fitness:
+                self.best_fitness, self.best_strategy = elitism[0][1], elitism[0][0]
+            
+            new_population = []
+            # Gera nova população via crossover e mutação
+            while len(new_population) < self.population_size:
+                parent1, parent2 = random.sample([dna for dna, _ in elitism], 2)
+                child = crossover_dna(parent1, parent2)
+                child = mutate_dna(child, mutation_rate)
+                new_population.append(child)
+            
+            # Garante que a nova população tenha o tamanho correto
+            self.population = new_population[:self.population_size]
+            
+            print(f"Cosmic DNA Gen {gen+1}/{generations} - Best Fitness: {self.best_fitness:.4f}")
+        return self.best_strategy
+
+    def chain_of_thought(self, prompt):
+        """
+        Gera uma cadeia de pensamento com base na sequência de DNA evoluída.
+        Cada base é mapeada para um conceito.
+        """
+        mapping = {
+            'A': "análise",
+            'T': "tecnologia",
+            'C': "criatividade",
+            'G': "gestão",
+            'Ω': "inovação",
+            'Δ': "desafio"
+        }
+        if self.best_strategy is None:
+            return "Nenhuma estratégia evoluída ainda."
+        chain = [mapping.get(base, "pensamento") for base in self.best_strategy]
+        thought = ' -> '.join(chain)
+        return f"Prompt: {prompt}\nChain-of-Thought: {thought}"
+
+##############################################
+# MODULE 6: SISTEMA DE MENTE SINTÉTICA Integrado
+##############################################
+
+class SyntheticMindSystem:
+    def __init__(self):
+        # Inicia os módulos
+        self.cosmo = CosmoHybrid()
+        self.exo = ExoSimulator()
+        self.dna_chain = CosmicDNAChain(length=128, population_size=100)
+        self.key_base = np.random.randn(2048)
+        # A evolução da chave quântica é um experimento inicial
+        self.q_key, self.key_stats = evolve_key(self.key_base, generations=30, pop_size=100, n_jobs=2)
+        self.last_combined_metric = 0.0 # Novo atributo para armazenar a última métrica combinada
+
+
+    def run_cosmology_experiment(self):
+        """Executa a simulação cosmológica e retorna uma métrica."""
+        # A métrica já é o valor final de H(z)
+        h_final = self.cosmo.simulate_universe(z_max=1.0)
+        print("Simulação Cosmológica:")
+        print(f"H(z) final: {h_final:.2f}")
+        return h_final
+
+    def run_exoplanet_experiment(self):
+        """Executa a simulação de exoplanetas e retorna uma métrica."""
+        # A métrica já é o fluxo médio
+        avg_flux = self.exo.simulate_spectrum(T0=1500, alpha=0.1)
+        print("Simulação de Exoplanetas:")
+        print(f"Fluxo médio: {avg_flux:.2f}")
+        return avg_flux
+
+    def run_quantum_encryption_experiment(self):
+        """Executa o experimento de criptografia quântica e retorna a fitness da chave."""
+        # A métrica já é a fitness da chave
+        key_fitness = fitness_key(self.q_key)
+        print("Experimento de Criptografia Quântica:")
+        print(f"Fitness da chave evolutiva: {key_fitness:.4f}")
+        return key_fitness
+    
+    def run_nasa_experiment(self, date=None):
+        """
+        Usa a API da NASA para coletar dados reais (APOD).
+        Retorna o comprimento da explicação como uma métrica de "complexidade" ou "interesse".
+        """
+        # API Key - CUIDADO: Em produção, usar variáveis de ambiente!
+        api_key = "DEMO_KEY" # Use a chave de demonstração da NASA para evitar expor sua chave real
+        data = fetch_nasa_apod(api_key, date)
+        if data:
+            print("Dados da NASA APOD:")
+            print("Título:", data.get('title', 'N/A'))
+            explanation_length = len(data.get('explanation', ""))
+            print("Tamanho da explicação:", explanation_length)
+            return explanation_length
+        else:
+            print("Falha no experimento NASA API.")
+            return 0 # Retorna 0 em caso de falha para a métrica combinada
+
+    def integrate_knowledge(self):
+        """
+        Integra os resultados dos experimentos de todos os módulos
+        e gera uma métrica combinada que reflete o desempenho geral da IA.
+        """
+        h_eval = self.run_cosmology_experiment()
+        flux_eval = self.run_exoplanet_experiment()
+        key_eval = self.run_quantum_encryption_experiment()
+        nasa_eval = self.run_nasa_experiment() # Executa o experimento da NASA API
+
+        # Normalização das métricas para evitar que uma domine a outra
+        # Estas são normalizações arbitrárias e podem ser melhoradas via "deep research"
+        # Valores de referência: H(z) ~ 70, Fluxo ~ 1500, Key Fitness ~ 3.5, NASA Explanation ~ 1000
+        
+        # Simplesmente usamos os valores retornados como métricas
+        # A normalização mais sofisticada ocorre no evaluate_dna se necessário
+        
+        # Assumindo que todos os run_x_experiment retornam um float
+        combined_metric = (h_eval + flux_eval + key_eval + (nasa_eval if nasa_eval is not None else 0)) / 4.0
+        
+        self.last_combined_metric = combined_metric # Armazena a métrica para uso na evolução do DNA
+        print(f"Métrica Combinada (Média dos experimentos): {combined_metric:.4f}")
+        return combined_metric
+
+    def evolve_cosmic_dna(self):
+        """
+        Evolve o DNA Cósmico, passando a métrica combinada de conhecimento
+        como feedback para a função de aptidão do DNA.
+        """
+        # Garante que a integração de conhecimento mais recente seja feita antes da evolução do DNA
+        latest_metric = self.integrate_knowledge() 
+        
+        print(f"\nIniciando Evolução do DNA Cósmico com Feedback Externo: {latest_metric:.4f}")
+        # Passa o feedback externo para a função evolve do DNA
+        best_dna = self.dna_chain.evolve(generations=30, mutation_rate=0.05, external_feedback_metric=latest_metric)
+        print("DNA Cósmico Evoluído (Melhor Estratégia):")
+        print(''.join(best_dna))
+        return best_dna
+
+    def generate_chain_of_thought(self, prompt):
+        """Gera a cadeia de pensamento da IA com base no DNA evoluído."""
+        return self.dna_chain.chain_of_thought(prompt)
+
+    def export_all_information(self):
+        """Exporta o estado atual da IA e os parâmetros aprendidos."""
+        info = {
+            "cosmology": {
+                "H0": self.cosmo.H0,
+                "Omega_m": self.cosmo.Om,
+                "Omega_L": self.cosmo.Ol,
+            },
+            "exoplanets": "Dados simulados de espectro ficcional (Fluxo médio: {:.2f})".format(self.run_exoplanet_experiment()), # Atualiza para mostrar valor
+            "quantum_key": self.q_key.tolist(),
+            "cosmic_dna": ''.join(self.dna_chain.best_strategy) if self.dna_chain.best_strategy else None,
+            "last_combined_metric": self.last_combined_metric # Inclui a métrica combinada na exportação
+        }
+        print("Exportando informações para o novo universo virtual...")
+        return info
+
+##############################################
+# MODULE 7: NASA API ACCESS (Função auxiliar)
+##############################################
+
+def fetch_nasa_apod(api_key, date=None):
+    """
+    Função auxiliar para buscar dados da API da NASA APOD.
+    Usa a DEMO_KEY para evitar exposição de chaves reais em exemplos.
+    """
+    url = "https://api.nasa.gov/planetary/apod"
+    params = {"api_key": api_key}
+    if date:
+        params['date'] = date
+    try:
+        response = requests.get(url, params=params)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"Erro ao buscar dados da NASA. Código: {response.status_code}, Resposta: {response.text}")
+            return None
+    except Exception as e:
+        print(f"Exceção ao acessar a NASA API: {e}")
+        return None
+
+##############################################
+# MODULE 8: DSL INTERPRETER
+##############################################
+
+def run_dsl_script(script, system):
+    """
+    Interpreta um script DSL simples, linha por linha.
+    Comandos disponíveis:
+    - COSMO_SIMULATE: Executa simulação cosmológica.
+    - EXO_SIMULATE: Executa simulação de exoplanetas.
+    - EVOLVE_DNA: Evolve o DNA Cósmico.
+    - CHAIN_OF_THOUGHT <prompt>: Gera uma cadeia de pensamento para um prompt.
+    - EXPORT_INFO: Exporta o estado atual do sistema.
+    - NASA_EXPERIMENT [date=YYYY-MM-DD]: Executa experimento com a API da NASA APOD.
+    """
+    for line in script.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        tokens = line.split()
+        command = tokens[0]
+        args = tokens[1:]
+        
+        print(f"\n--- Executando Comando DSL: {command} ---")
+        if command == "COSMO_SIMULATE":
+            system.run_cosmology_experiment()
+        elif command == "EXO_SIMULATE":
+            system.run_exoplanet_experiment()
+        elif command == "EVOLVE_DNA":
+            system.evolve_cosmic_dna()
+        elif command == "CHAIN_OF_THOUGHT":
+            prompt = " ".join(args)
+            print(system.generate_chain_of_thought(prompt))
+        elif command == "EXPORT_INFO":
+            info = system.export_all_information()
+            print("DSL EXPORT_INFO:", info)
+        elif command == "NASA_EXPERIMENT":
+            date = None
+            for arg in args:
+                if arg.startswith("date="):
+                    date = arg.split("=")[1]
+            system.run_nasa_experiment(date)
+        else:
+            print(f"Comando desconhecido: {command}")
+
+##############################################
+# MAIN: Execução do Sistema com DSL
+##############################################
+
+if __name__ == '__main__':
+    print("Iniciando o Sistema de Mente Sintética em Evolução (AeonCosma Engine)...")
+    synthetic_mind = SyntheticMindSystem()
+    
+    # Exemplo de DSL Script para demonstrar o loop de autoaprendizagem
+    dsl_script = """
+    # Executa simulações para obter feedback inicial
+    COSMO_SIMULATE
+    EXO_SIMULATE
+    NASA_EXPERIMENT date=2024-06-15
+    
+    # Evolve o DNA Cósmico, que agora usa o feedback das simulações anteriores
+    EVOLVE_DNA
+    
+    # Gera uma cadeia de pensamento com base no DNA evoluído
+    CHAIN_OF_THOUGHT How can AI learn to adapt to new scientific discoveries?
+    
+    # Opcional: Executa mais experimentos e evolve o DNA novamente para ver o efeito do novo feedback
+    COSMO_SIMULATE
+    EXO_SIMULATE
+    NASA_EXPERIMENT date=2024-06-16
+    EVOLVE_DNA
+    
+    # Exporta o estado final do sistema
+    EXPORT_INFO
+    """
+    
+    print("\n--- Executando Script DSL ---")
+    run_dsl_script(dsl_script, synthetic_mind)
+

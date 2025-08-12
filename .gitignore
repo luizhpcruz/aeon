@@ -49,6 +49,91 @@ python_env/
 *.swo
 *~
 
+# AEON Project - Large folders to exclude from Git
+archive/
+ARCHIVE_BACKUP/
+digital_twin/
+advanced/
+IA p2p trader/
+DAEMON PROJECT/
+venv/
+Nova pasta/
+TEST/
+aeon_historico/
+
+# AEON Project - Generated files
+*.log
+*.tmp
+*.cache
+aeon_report.json
+aeon_launcher.log
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+
+# AEON Project - Large media files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.pdf
+*.svg
+*.ico
+
+# AEON Project - Temporary and backup files
+*backup*
+*_backup_*
+Novo*.txt
+arte*.png
+baixados*.png
+cfvb.png
+HALO*.png
+perturbada.png
+*~
+*.swp
+*.swo
+
+# AEON Project - Model exports and data
+aeon_model_export/
+data/
+logs/
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+
+# AEON Project - HTML exports and documentation builds
+*.html
+*_files/
+_build/
+docs/_build/
+
+# AEON Project - Configuration and secrets
+.env
+.env.local
+.env.*.local
+config.json
+secrets.json
+*.key
+*.pem
+*.crt
+
+# AEON Project - Development files
+.pytest_cache/
+.coverage
+coverage.xml
+*.cover
+.hypothesis/
+.tox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
 # OS generated files
 .DS_Store
 .DS_Store?
@@ -245,7 +330,6 @@ Figure_*.png
 *.ipynb
 logs/
 archive/
-advanced/
 data/
 visualizations/
 aeon_model_export/

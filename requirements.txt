@@ -1,23 +1,49 @@
 #############################
-# AEON Minimal MVP Requirements
-# Mantido intencionalmente enxuto para rodar:
-#  - teste_entropia.py
-#  - teste_simples.py (V.E.R.N.A.)
-#  - teste_cosmologia.py
-#  - teste_aeon_cosma.py
-#  - aeon_dashboard.py (Streamlit)
+# AEON Project - Core Dependencies
+# Mantido enxuto para funcionalidade principal:
+#  - Sistema P2P distribuído
+#  - Análise de entropia
+#  - Modelo cosmológico
+#  - Sistema V.E.R.N.A.
+#  - Dashboard Streamlit
 #############################
 
+# Core scientific computing
 numpy>=1.25.0
 pandas>=2.0.0
+scipy>=1.11.0
+
+# Visualization
 matplotlib>=3.8.0
 seaborn>=0.13.0
 plotly>=5.20.0
+
+# Web interface
 streamlit>=1.36.0
 
-# Comentado (adicionar quando avançar para APIs / modelos):
-# fastapi
-# uvicorn
+# Async and networking
+asyncio-mqtt>=0.13.0
+aiofiles>=23.0.0
+websockets>=11.0.0
+
+# Utilities
+tqdm>=4.66.0
+click>=8.1.0
+pyyaml>=6.0.0
+python-dotenv>=1.0.0
+
+# System monitoring
+psutil>=5.9.0
+
+# Optional - API development (uncomment when needed)
+# fastapi>=0.104.0
+# uvicorn>=0.24.0
+# httpx>=0.25.0
+
+# Optional - Machine Learning (uncomment when needed)
+# scikit-learn>=1.3.0
+# tensorflow>=2.13.0
+# torch>=2.0.0
 # jinja2
 # requests
 # scipy            # apenas se necessário para versão completa de cosmologia

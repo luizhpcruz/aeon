@@ -1,0 +1,94 @@
+import numpy as np
+import collections
+import copy
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# (Assumo que o resto das funções do seu código — ciclo_simbolico, calcular_entropia, etc. — estão carregadas)
+
+# Função para gerar diferentes tipos de entrada variável
+def gerar_entrada(tipo, tamanho):
+    if tipo == "aleatoria":
+        return np.random.choice([None,0,1,2,3], tamanho)
+    elif tipo == "pulso":
+        arr = [None]*tamanho
+        meio = tamanho//2
+        arr[meio:meio+3] = [3,3,3]
+        return arr
+    elif tipo == "ruido":
+        base = [0,1,2,3,None]
+        return np.random.choice(base, tamanho, p=[0.1,0.1,0.1,0.1,0.6])
+    else:
+        return [None]*tamanho
+
+# Função para segmentar sinais em janelas e medir entropia média por janela
+def segmentar_e_medir(fitas_hist, janela=5):
+    n_fitas, n_ciclos = fitas_hist.shape
+    n_janelas = n_ciclos // janela
+    ent_medias = np.zeros((n_fitas, n_janelas))
+    for j in range(n_janelas):
+        ent_medias[:, j] = np.mean(fitas_hist[:, j*janela:(j+1)*janela], axis=1)
+    return ent_medias
+
+# Parâmetros de simulação
+N_CICLOS_TESTE = 50
+N_FITAS = 5
+N_CELULAS = 32
+N_ESTADOS = 4
+
+# Inicializa fitas com vazio
+fitas = [[None]*N_CELULAS for _ in range(N_FITAS)]
+
+# Para armazenar entropia ao longo do tempo
+hist_ent = np.zeros((N_FITAS, N_CICLOS_TESTE))
+
+# Teste com diferentes entradas
+entradas_testes = ["aleatoria", "pulso", "ruido"]
+resultados = {}
+
+for tipo in entradas_testes:
+    # Reinicia fitas
+    fitas = [[None]*N_CELULAS for _ in range(N_FITAS)]
+    entrada = gerar_entrada(tipo, N_CELULAS)
+    print(f"Testando entrada: {tipo}")
+    
+    for t in range(N_CICLOS_TESTE):
+        for i in range(N_FITAS):
+            # Injeta entrada variável na fita
+            for idx in range(N_CELULAS):
+                fitas[i][idx] = entrada[idx]
+            # Ciclo simbólico
+            fitas[i] = ciclo_simbolico(fitas[i], N_ESTADOS)
+        # Armazena entropia
+        for i in range(N_FITAS):
+            hist_ent[i, t] = calcular_entropia(fitas[i])
+    
+    resultados[tipo] = hist_ent.copy()
+
+# Visualização dos resultados
+plt.figure(figsize=(15,10))
+for idx, tipo in enumerate(entradas_testes):
+    plt.subplot(3,1,idx+1)
+    for i in range(N_FITAS):
+        plt.plot(resultados[tipo][i], label=f"Fita {i}")
+    plt.title(f"Entropia - Entrada: {tipo}")
+    plt.xlabel("Ciclo")
+    plt.ylabel("Entropia (bits)")
+    plt.legend()
+    plt.grid(True, linestyle=':')
+plt.tight_layout()
+plt.show()
+
+# Segmentação temporal para entrada aleatória
+ent_segmentada = segmentar_e_medir(resultados["aleatoria"], janela=10)
+
+plt.figure(figsize=(8,5))
+for i in range(N_FITAS):
+    plt.plot(ent_segmentada[i], label=f"Fita {i}")
+plt.title("Entropia Média por Janela (entrada aleatória, janela=10 ciclos)")
+plt.xlabel("Janela Temporal")
+plt.ylabel("Entropia Média")
+plt.legend()
+plt.grid(True, linestyle=':')
+plt.tight_layout()
+plt.show()

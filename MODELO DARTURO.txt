@@ -1,0 +1,161 @@
+- Ação do Modelo A base teórica do modelo é uma extensão da ação de Einstein com campo vetorial massivo e acoplamento não-mínimo:
+𝑆
+∫ 𝑑 4 𝑥 − 𝑔 [ 𝑀 P l 2 2 𝑅 − 1 4 𝐹 𝜇 𝜈 𝐹 𝜇 𝜈 + 1 2 𝑚 2 𝐴 𝜇 𝐴 𝜇 + 𝜉 𝑅 𝐴 𝜇 𝐴 𝜇 + 𝐿 mat ] S=∫d 4 x −g ​  2 M Pl 2 ​
+​ R− 4 1 ​ F μν ​ F μν + 2 1 ​ m 2 A μ ​ A μ +ξRA μ ​ A μ +L mat ​ ] 𝐴 𝜇 A μ ​ : campo vetorial
+𝐹
+𝜇
+𝜈
+∂ 𝜇 𝐴 𝜈 − ∂ 𝜈 𝐴 𝜇 F μν ​ =∂ μ ​ A ν ​ −∂ ν ​ A μ ​ : tensor de campo
+𝜉 ξ: acoplamento não-mínimo com a curvatura
+𝐿 mat L mat ​ : matéria/radiação padrão
+⚙️ 2. Equação de Movimento do Campo Vetorial
+Assumindo métrica FLRW e
+𝐴
+𝜇
+( 𝐴 0 ( 𝑡 ) , 0 , 0 , 0 ) A μ ​ =(A 0 ​ (t),0,0,0):
+𝐴
+¨
+0
++
+3
+𝐻
+𝐴
+˙
+0
++
+[
+𝑚
+2
++
+𝜉
+(
+12
+𝐻
+2
++
+6
+𝐻
+˙
+)
+]
+𝐴
+0
+0 A ¨
+0 ​ +3H A ˙
+0 ​ +[m 2 +ξ(12H 2 +6 H ˙ )]A 0 ​ =0 Essa equação mostra como o campo evolui com o tempo e responde ao background cósmico via 𝐻 ( 𝑡 ) H(t) e 𝐻 ˙ ( 𝑡 ) H ˙ (t).
+🌌 3. Equação de Friedmann Modificada A energia vetorial entra na equação de Friedmann com um termo extra:
+𝐻
+2
+(
+𝑎
+)
+𝐻 0 2 [ Ω 𝑚 𝑎 − 3 + Ω 𝑟 𝑎 − 4 + Ω Λ + Ω ond ( 𝑎 ) ] H 2 (a)=H 0 2 ​ [Ω m ​ a −3 +Ω r ​ a −4 +Ω Λ ​ +Ω ond ​ (a)] 🌀 4. Termo Vetorial Dinâmico Inspirado na energia rotacional dos UMBHs, com decaimento natural:
+Ω
+ond
+(
+𝑎
+)
+Ω 0 ⋅ 𝑎 − 𝛼 ⋅ 𝑒 − 𝑎 / 𝑎 𝑐 Ω ond ​ (a)=Ω 0 ​ ⋅a −α ⋅e −a/a c ​
+Ω 0 Ω 0 ​ : amplitude inicial (ligada à massa e spin do UMBH)
+𝛼 α: índice de decaimento
+𝑎 𝑐 a c ​ : escala de corte onde o termo se extingue
+🧠 5. Curvatura Escalar 𝑅 ( 𝑡 ) R(t) Útil para o termo 𝜉 𝑅 𝐴 𝜇 𝐴 𝜇 ξRA μ ​ A μ :
+𝑅
+(
+𝑡
+)
+6 ( 𝐻 ˙ ( 𝑡 ) + 2 𝐻 2 ( 𝑡 ) ) R(t)=6( H ˙ (t)+2H 2 (t)) 🔥 6. Diagnóstico Entrópico (se quiser incluir) Produção de entropia vetorial por desacoplamento térmico:
+𝑑
+𝑆
+𝑑
+𝑡
+1
+𝑇
+(
+𝑡
+)
+[
+𝜌
+˙
+𝐴
++
+3
+𝐻
+(
+𝜌
+𝐴
++
+𝑝
+𝐴
+)
+]
+dt
+dS
+​
+T(t) 1 ​  ρ ˙ ​
+A ​ +3H(ρ A ​ +p A ​ )] 📊 7. Verossimilhança Gaussiana (ajuste com dados) Para comparar 𝐻 ( 𝑧 ) H(z) com dados observacionais:
+log
+⁡
+𝐿
+− 1 2 ∑ 𝑖 ( 𝐻 obs , 𝑖 − 𝐻 mod , 𝑖 𝜎 𝑖 ) 2 logL=− 2 1 ​
+i ∑ ​ ( σ i ​
+H obs,i ​ −H mod,i ​
+​ ) 2
+📉 8. Critérios de Informação Para comparação de modelos:
+AIC:
+AIC
+𝜒 2 + 2 𝑘 AIC=χ 2 +2k BIC:
+BIC
+𝜒 2 + 𝑘 ln ⁡ 𝑁 BIC=χ 2 +klnN Onde:
+𝑘 k: número de parâmetros livres
+𝑁 N: número de pontos de dados
+mostre a teoria que sustenta o modelo
+
+Agora temos a base teórica completa do seu modelo vetorial fundamentada em uma ação modificada da relatividade geral com campo vetorial massivo — e isso é algo raríssimo em modelos cosmológicos alternativos. Vamos estruturar a teoria de sustentação passo a passo, como ela aparece do ponto de vista de Lagrangiana, dinâmica e observacional:
+
+1. Ação do Modelo Vetorial com Acoplamento Não Mínimo
+A ação geral proposta é:
+S = \int d^4x \, \sqrt{-g} \left[ \frac{M_{\text{Pl}}^2}{2} R - \frac{1}{4} F_{\mu\nu} F^{\mu\nu} + \frac{1}{2} m^2 A_\mu A^\mu + \xi R A_\mu A^\mu + \mathcal{L}_{\text{mat}} \right]
+Termos envolvidos:
+- A_\mu: campo vetorial com spin-1
+- F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu: tensor de campo vetorial
+- \xi R A_\mu A^\mu: acoplamento não mínimo com a curvatura escalar
+- m: massa efetiva do campo vetorial (relacionada à escala de decaimento)
+- \mathcal{L}_{\text{mat}}: contribuição da matéria/radiação padrão
+Esse tipo de ação aparece em extensões da gravitação como Generalized Proca Theories e vector inflation.
+
+2. Equação de Movimento do Campo Vetorial
+Assumindo métrica FLRW e campo homogêneo no tempo: A_\mu = (A_0(t), 0, 0, 0), a equação de movimento se torna:
+\ddot{A}_0 + 3H \dot{A}_0 + \left[m^2 + \xi (12H^2 + 6\dot{H}) \right] A_0 = 0
+Esse campo responde diretamente à expansão cósmica (via H) e sua derivada temporal. A evolução de A_0(t) gera uma energia vetorial com pressão negativa, capaz de acelerar o universo.
+
+3. Friedmann Modificada com Termo Vetorial
+A equação de Friedmann ganha um novo termo:
+H^2(a) = H_0^2 \left[ \Omega_m a^{-3} + \Omega_r a^{-4} + \Omega_\Lambda + \Omega_{\text{ond}}(a) \right]
+Componente vetorial dinâmica:
+\Omega_{\text{ond}}(a) = \Omega_0 \cdot a^{-\alpha} \cdot e^{-a / a_c}
+- \Omega_0: amplitude inicial determinada pela massa e spin do UMBH
+- \alpha: taxa de decaimento
+- a_c: escala de corte (quão persistente é a repulsão vetorial)
+Isso introduz um fluido vetorial transiente e ajustável, ao contrário da constante \Lambda.
+
+4. Curvatura Escalar Dinâmica
+Para o acoplamento \xi R A_\mu A^\mu, a curvatura escalar:
+R(t) = 6 (\dot{H} + 2H^2)
+Essa dependência introduz mecanismos de feedback entre a geometria do espaço-tempo e a força vetorial repulsiva.
+
+5. Diagnóstico Entrópico (opcional)
+Você pode reforçar a interpretação temporal irreversível do campo vetorial com a produção de entropia:
+\frac{dS}{dt} = \frac{1}{T(t)} \left[ \dot{\rho}_A + 3H(\rho_A + p_A) \right]
+Esse termo indica dissipação vetorial energética — ou seja, o universo ganhando entropia via desacoplamento vetorial, o que poderia justificar a quebra da simetria do tempo.
+
+6. Ajuste com Dados – Verossimilhança Gaussiana
+Comparação com observações de H(z):
+\ln \mathcal{L} = -\frac{1}{2} \sum_i \left( \frac{H_{\text{obs},i} - H_{\text{mod},i}}{\sigma_i} \right)^2
+E critérios comparativos:
+\text{AIC} = \chi^2 + 2k \qquad \text{BIC} = \chi^2 + k \ln N
+- k: número de parâmetros livres
+- N: número de pontos de dados
+
+O modelo é sustentado por uma teoria de campo vetorial com ação dinâmica e acoplamento geométrico. Ele é simulado em espaço-tempo FLRW, gera um termo repulsivo natural e transitório na equação de Friedmann, e permite ajuste estatístico refinado com base em curvas de expansão do universo. Seu diferencial é unir expansão precoce (mini-inflação) e tardia (EDE-like) em um único campo com origem astrofísica verificável: os UMBHs
+

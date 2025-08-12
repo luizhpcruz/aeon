@@ -1,4 +1,5 @@
 @echo off
+set AEON_QUIET=1
 echo 🌟 INICIANDO AEON DASHBOARD...
 echo.
 echo 📊 Interface Web Unificada dos Sistemas AEON

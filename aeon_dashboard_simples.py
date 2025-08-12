@@ -11,7 +11,8 @@ import json
 from datetime import datetime
 
 class AeonDashboardSimples:
-    def __init__(self):
+    def __init__(self, quiet: bool = False):
+        self.quiet = quiet
         self.sistemas = {
             "verna": {
                 "nome": "🧠 V.E.R.N.A.",
@@ -39,10 +40,11 @@ class AeonDashboardSimples:
         """Executa um sistema específico"""
         sistema = self.sistemas[sistema_key]
         
-        print(f"\n🔄 EXECUTANDO: {sistema['nome']}")
-        print(f"📄 Arquivo: {sistema['arquivo']}")
-        print(f"📋 Descrição: {sistema['descricao']}")
-        print("=" * 70)
+        if not self.quiet:
+            print(f"\n🔄 EXECUTANDO: {sistema['nome']}")
+            print(f"📄 Arquivo: {sistema['arquivo']}")
+            print(f"📋 Descrição: {sistema['descricao']}")
+            print("=" * 70)
         
         try:
             inicio = time.time()
@@ -56,29 +58,34 @@ class AeonDashboardSimples:
             duracao = fim - inicio
             
             if resultado.returncode == 0:
-                print(f"✅ {sistema['nome']} - SUCESSO ({duracao:.1f}s)")
-                print("\n📊 OUTPUT:")
-                print("-" * 50)
-                print(resultado.stdout)
+                if not self.quiet:
+                    print(f"✅ {sistema['nome']} - SUCESSO ({duracao:.1f}s)")
+                    print("\n📊 OUTPUT:")
+                    print("-" * 50)
+                    print(resultado.stdout)
                 return True
             else:
-                print(f"❌ {sistema['nome']} - ERRO")
-                print(f"🔍 Erro: {resultado.stderr}")
+                if not self.quiet:
+                    print(f"❌ {sistema['nome']} - ERRO")
+                    print(f"🔍 Erro: {resultado.stderr}")
                 return False
                 
         except subprocess.TimeoutExpired:
-            print(f"⏰ {sistema['nome']} - TIMEOUT (>30s)")
+            if not self.quiet:
+                print(f"⏰ {sistema['nome']} - TIMEOUT (>30s)")
             return False
         except Exception as e:
-            print(f"💥 {sistema['nome']} - EXCEÇÃO: {e}")
+            if not self.quiet:
+                print(f"💥 {sistema['nome']} - EXCEÇÃO: {e}")
             return False
     
     def executar_todos(self):
         """Executa todos os sistemas em sequência"""
-        print("🌟 AEON DASHBOARD - EXECUÇÃO COMPLETA")
-        print("=" * 80)
-        print(f"⏰ Iniciado em: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        print()
+        if not self.quiet:
+            print("🌟 AEON DASHBOARD - EXECUÇÃO COMPLETA")
+            print("=" * 80)
+            print(f"⏰ Iniciado em: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            print()
         
         resultados = []
         
@@ -88,22 +95,27 @@ class AeonDashboardSimples:
             time.sleep(2)  # Pausa entre execuções
         
         # Relatório final
-        print("\n" + "=" * 80)
-        print("🎯 RELATÓRIO FINAL DO ECOSSISTEMA AEON")
-        print("=" * 80)
+        if not self.quiet:
+            print("\n" + "=" * 80)
+            print("🎯 RELATÓRIO FINAL DO ECOSSISTEMA AEON")
+            print("=" * 80)
         
         sucessos = 0
         for nome, sucesso in resultados:
-            status = "✅ SUCESSO" if sucesso else "❌ FALHA"
-            print(f"{nome}: {status}")
+            if not self.quiet:
+                status = "✅ SUCESSO" if sucesso else "❌ FALHA"
+                print(f"{nome}: {status}")
             if sucesso:
                 sucessos += 1
         
         taxa_sucesso = (sucessos / len(resultados)) * 100
-        print(f"\n📊 ESTATÍSTICAS:")
-        print(f"   • Sistemas executados: {len(resultados)}")
-        print(f"   • Sucessos: {sucessos}")
-        print(f"   • Taxa de sucesso: {taxa_sucesso:.1f}%")
+        if self.quiet:
+            print(f"✅ Sucessos: {sucessos}/{len(resultados)} | Taxa: {taxa_sucesso:.1f}%")
+        else:
+            print(f"\n📊 ESTATÍSTICAS:")
+            print(f"   • Sistemas executados: {len(resultados)}")
+            print(f"   • Sucessos: {sucessos}")
+            print(f"   • Taxa de sucesso: {taxa_sucesso:.1f}%")
         
         if taxa_sucesso >= 75:
             print("\n🎉 ECOSSISTEMA AEON: TOTALMENTE OPERACIONAL")
@@ -115,7 +127,8 @@ class AeonDashboardSimples:
             print("\n🔧 ECOSSISTEMA AEON: REQUER AJUSTES")
             print("   ⚠️ Alguns sistemas precisam correção")
         
-        print(f"\n🏁 Execução concluída em: {datetime.now().strftime('%H:%M:%S')}")
+        if not self.quiet:
+            print(f"\n🏁 Execução concluída em: {datetime.now().strftime('%H:%M:%S')}")
         return resultados
     
     def menu_interativo(self):
@@ -198,13 +211,32 @@ class AeonDashboardSimples:
 
 def main():
     """Função principal do dashboard"""
-    dashboard = AeonDashboardSimples()
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--quiet", action="store_true", help="Saída compacta no console")
+    args = ap.parse_args()
+
+    # Permite ativar quiet por variável de ambiente
+    import os
+    if os.getenv("AEON_QUIET", "").strip().lower() in {"1", "true", "yes", "on"}:
+        args.quiet = True
+
+    dashboard = AeonDashboardSimples(quiet=args.quiet)
     
-    print("🌟 BEM-VINDO AO AEON DASHBOARD!")
-    print("Sistema Integrado de Inteligência Artificial e Consciência Emergente")
-    print(f"⏰ {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    
-    dashboard.menu_interativo()
+    if not dashboard.quiet:
+        print("🌟 BEM-VINDO AO AEON DASHBOARD!")
+        print("Sistema Integrado de Inteligência Artificial e Consciência Emergente")
+        print(f"⏰ {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+
+    # Em modo quiet, não abre menu interativo; executa todos e encerra
+    if dashboard.quiet:
+        resultados = dashboard.executar_todos()
+        # código de saída baseado em sucesso
+        sucessos = sum(1 for _, ok in resultados)
+        import sys as _sys
+        _sys.exit(0 if sucessos == len(resultados) else 1)
+    else:
+        dashboard.menu_interativo()
 
 if __name__ == "__main__":
     main()

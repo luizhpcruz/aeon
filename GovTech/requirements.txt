@@ -1,4 +1,0 @@
-pyscard
-speechrecognition
-pyttsx3
-cryptography
