@@ -120,14 +120,17 @@ Get-Process *Code* | Measure-Object WorkingSet -Sum
 
 #### **Script de monitoramento:**
 ```python
-# Criar monitor_ram.py
-import psutil
-import time
+# ✅ CRIADO: monitor_ram.py - Monitor completo de RAM para AEON
+# Uso:
+python monitor_ram.py           # Monitor contínuo
+python monitor_ram.py --quick   # Verificação única
+python monitor_ram.py --help    # Ajuda
 
-while True:
-    mem = psutil.virtual_memory()
-    print(f"RAM: {mem.percent}% | Disponível: {mem.available/1024**3:.1f}GB")
-    time.sleep(30)
+# Recursos:
+# - Detecta automaticamente processos AEON
+# - Alertas em tempo real
+# - Log detalhado em JSON
+# - Interface limpa no console
 ```
 
 #### **Alertas automáticos:**
