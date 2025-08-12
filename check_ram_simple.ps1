@@ -17,9 +17,9 @@ function Get-RAMInfo {
     $usagePercent = [math]::Round(($usedRAM / $totalRAM) * 100, 1)
     
     return @{
-        TotalGB = $totalRAM
-        UsedGB = $usedRAM
-        FreeGB = $freeRAM
+        TotalGB      = $totalRAM
+        UsedGB       = $usedRAM
+        FreeGB       = $freeRAM
         UsagePercent = $usagePercent
     }
 }
@@ -30,20 +30,20 @@ function Get-AeonProcesses {
     # Python processes related to AEON
     Get-Process python* -ErrorAction SilentlyContinue | ForEach-Object {
         $processes += [PSCustomObject]@{
-            Name = "Python: " + $_.ProcessName
-            PID = $_.Id
+            Name     = "Python: " + $_.ProcessName
+            PID      = $_.Id
             MemoryMB = [math]::Round($_.WorkingSet / 1MB, 1)
-            Type = "AEON Script"
+            Type     = "AEON Script"
         }
     }
     
     # VS Code
     Get-Process *Code* -ErrorAction SilentlyContinue | ForEach-Object {
         $processes += [PSCustomObject]@{
-            Name = "VSCode: " + $_.ProcessName
-            PID = $_.Id
+            Name     = "VSCode: " + $_.ProcessName
+            PID      = $_.Id
             MemoryMB = [math]::Round($_.WorkingSet / 1MB, 1)
-            Type = "VS Code"
+            Type     = "VS Code"
         }
     }
     
@@ -61,8 +61,8 @@ function Show-RAMStatus {
     
     # RAM Status
     $statusColor = switch ($RAMInfo.UsagePercent) {
-        {$_ -lt 70} { "Green" }
-        {$_ -lt 85} { "Yellow" }
+        { $_ -lt 70 } { "Green" }
+        { $_ -lt 85 } { "Yellow" }
         default { "Red" }
     }
     
@@ -85,7 +85,8 @@ function Show-RAMStatus {
             $color = if ($_.MemoryMB -gt 100) { "Yellow" } elseif ($_.MemoryMB -gt 50) { "White" } else { "Gray" }
             Write-Host "$($_.Name) (PID $($_.PID)): $($_.MemoryMB) MB" -ForegroundColor $color
         }
-    } else {
+    }
+    else {
         Write-Host "No AEON processes detected" -ForegroundColor Gray
     }
     
@@ -95,7 +96,8 @@ function Show-RAMStatus {
     if ($RAMInfo.UsagePercent -ge 90) {
         Write-Host "CRITICAL ALERT: RAM above 90%!" -ForegroundColor Red -BackgroundColor Black
         Write-Host "Close unnecessary applications immediately" -ForegroundColor Red
-    } elseif ($RAMInfo.UsagePercent -ge 85) {
+    }
+    elseif ($RAMInfo.UsagePercent -ge 85) {
         Write-Host "WARNING: RAM above 85%" -ForegroundColor Yellow -BackgroundColor Black
         Write-Host "Monitor memory usage" -ForegroundColor Yellow
     }
@@ -109,9 +111,9 @@ function Show-DetailedInfo {
     
     # System classification
     $systemClass = switch ($RAMInfo.TotalGB) {
-        {$_ -lt 4} { "Basic System (Monitor AEON usage)" }
-        {$_ -lt 8} { "Standard System (OK for AEON)" }
-        {$_ -lt 16} { "Advanced System (Ideal for AEON)" }
+        { $_ -lt 4 } { "Basic System (Monitor AEON usage)" }
+        { $_ -lt 8 } { "Standard System (OK for AEON)" }
+        { $_ -lt 16 } { "Advanced System (Ideal for AEON)" }
         default { "High-End System (Perfect for AEON)" }
     }
     
@@ -126,9 +128,9 @@ function Show-DetailedInfo {
     Write-Host "   Impact: $impactPercent% of total RAM" -ForegroundColor White
     
     $recommendation = switch ($impactPercent) {
-        {$_ -lt 5} { "Low impact - Run without restrictions" }
-        {$_ -lt 10} { "Moderate impact - Monitor occasionally" }
-        {$_ -lt 15} { "High impact - Monitor regularly" }
+        { $_ -lt 5 } { "Low impact - Run without restrictions" }
+        { $_ -lt 10 } { "Moderate impact - Monitor occasionally" }
+        { $_ -lt 15 } { "High impact - Monitor regularly" }
         default { "Critical impact - Consider RAM upgrade" }
     }
     
@@ -159,7 +161,8 @@ if ($Monitor) {
     catch {
         Write-Host "`nMonitor stopped!" -ForegroundColor Green
     }
-} else {
+}
+else {
     # Single check
     $ramInfo = Get-RAMInfo
     $processes = Get-AeonProcesses
