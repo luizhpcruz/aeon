@@ -1,105 +1,105 @@
-import sys
-import csv
-from pathlib import Path
+import argparse
+import os
 from datetime import datetime
 
 from janus.core.engine import JanusEngine
 from janus.adapters.yfinance_adapter import fetch_series
+from janus.logging.csv_logger import CSVLogger
 
 
-# =========================================================
-# PATHS
-# =========================================================
-DATA_DIR = Path("data")
-LOG_FILE = DATA_DIR / "janus_log.csv"
-
-
-# =========================================================
-# INIT CSV
-# =========================================================
-def init_csv():
-    DATA_DIR.mkdir(exist_ok=True)
-
-    with open(LOG_FILE, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        writer.writerow([
-            "timestamp",
-            "symbol",
-            "price",
-            "score",
-            "state",
-            "event"
-        ])
-
-
-# =========================================================
-# MAIN
-# =========================================================
 def main():
-    # -------------------------
-    # Symbol
-    # -------------------------
-    if len(sys.argv) < 2:
-        print("Usage: python -m janus.services.runner <SYMBOL>")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(
+        description="JANUS — Market Regime Anomaly Sensor"
+    )
 
-    symbol = sys.argv[1]
-    print(f"Running JANUS on {symbol}")
+    parser.add_argument(
+        "symbol",
+        type=str,
+        help="Asset symbol (e.g. AAPL, BTC-USD, ^GSPC)"
+    )
 
-    # -------------------------
-    # Init
-    # -------------------------
-    init_csv()
+    parser.add_argument(
+        "--period",
+        type=str,
+        default="6mo",
+        help="Data period (default: 6mo)"
+    )
+
+    parser.add_argument(
+        "--interval",
+        type=str,
+        default="1d",
+        help="Candle interval (default: 1d)"
+    )
+
+    parser.add_argument(
+        "--log",
+        action="store_true",
+        help="Enable CSV logging to data/janus_log.csv"
+    )
+
+    parser.add_argument(
+        "--silent",
+        action="store_true",
+        help="Do not print step-by-step output"
+    )
+
+    args = parser.parse_args()
+
+    symbol = args.symbol
+    period = args.period
+    interval = args.interval
+
+    print(f"Running JANUS on {symbol} ({interval}, {period})")
+
+    # --- Fetch data ---
+    series = fetch_series(symbol, interval=interval, period=period)
+    if not series:
+        raise RuntimeError("No data returned for symbol")
+
+    # --- Engine ---
     engine = JanusEngine()
 
-    # -------------------------
-    # Fetch data
-    # -------------------------
-    series = fetch_series(symbol)
+    # --- Logger ---
+    logger = None
+    if args.log:
+        os.makedirs("data", exist_ok=True)
+        logger = CSVLogger("data/janus_log.csv")
 
-    if not series:
-        print("No data returned. Exiting.")
-        sys.exit(1)
+    last_state = None
 
-    # -------------------------
-    # Process
-    # -------------------------
-    prev_state = None
+    # --- Run ---
+    for price in series:
+        out = engine.ingest(float(price))
 
-    with open(LOG_FILE, "a", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
+        event = ""
+        if last_state is not None and out.state != last_state:
+            event = f"REGIME_CHANGE:{last_state}->{out.state}"
 
-        for price in series:
-            # Blindagem absoluta
-            if not isinstance(price, (int, float)):
-                continue
+        last_state = out.state
+        ts = datetime.utcnow().isoformat()
 
-            out = engine.ingest(price)
+        if logger:
+            logger.log(
+                timestamp=ts,
+                symbol=symbol,
+                price=float(price),
+                score=out.score,
+                state=out.state,
+                event=event
+            )
 
-            event = ""
-            if prev_state and prev_state != out.state:
-                event = f"REGIME_CHANGE:{prev_state}->{out.state}"
-
-            prev_state = out.state
-
-            writer.writerow([
-                datetime.utcnow().isoformat(),
-                symbol,
-                float(price),
-                out.score,
-                out.state,
-                event
-            ])
-
-            # Console feedback
-            line = f"Score={out.score:6.2f} | State={out.state}"
+        if not args.silent:
+            line = f"{ts} | {price:.2f} | {out.score:6.2f} | {out.state}"
             if event:
                 line += f" | {event}"
             print(line)
 
+    if logger:
+        logger.close()
 
-# =========================================================
-# ENTRY
-# =========================================================
+    print("Done.")
+
+
 if __name__ == "__main__":
     main()
