@@ -1,38 +1,41 @@
 import csv
-from pathlib import Path
-from datetime import datetime
+import os
 
 
-class JanusCSVLogger:
-    def __init__(self, symbol: str, base_dir="logs"):
-        self.symbol = symbol
-        self.base_dir = Path(base_dir)
-        self.base_dir.mkdir(exist_ok=True)
+class CSVLogger:
+    def __init__(self, path: str):
+        self.path = path
+        self.file = None
+        self.writer = None
 
-        self.filepath = self.base_dir / f"{symbol}.csv"
-        self._ensure_header()
+        self._open()
 
-    def _ensure_header(self):
-        if not self.filepath.exists():
-            with open(self.filepath, "w", newline="", encoding="utf-8") as f:
-                writer = csv.writer(f)
-                writer.writerow([
-                    "timestamp",
-                    "symbol",
-                    "price",
-                    "score",
-                    "state",
-                    "event"
-                ])
+    def _open(self):
+        file_exists = os.path.isfile(self.path)
 
-    def log(self, price, score, state, event=None):
-        with open(self.filepath, "a", newline="", encoding="utf-8") as f:
-            writer = csv.writer(f)
-            writer.writerow([
-                datetime.utcnow().isoformat(),
-                self.symbol,
-                round(price, 6),
-                score,
-                state,
-                event or ""
-            ])
+        self.file = open(self.path, mode="a", newline="", encoding="utf-8")
+        self.writer = csv.writer(self.file)
+
+        if not file_exists:
+            self.writer.writerow(
+                ["timestamp", "symbol", "price", "score", "state", "event"]
+            )
+            self.file.flush()
+
+    def log(
+        self,
+        timestamp: str,
+        symbol: str,
+        price: float,
+        score: float,
+        state: str,
+        event: str = "",
+    ):
+        self.writer.writerow(
+            [timestamp, symbol, price, score, state, event]
+        )
+        self.file.flush()
+
+    def close(self):
+        if self.file:
+            self.file.close()
