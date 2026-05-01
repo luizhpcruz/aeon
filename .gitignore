@@ -1,37 +1,9 @@
-# Byte-compiled / optimized / DLL files
+# Python cache
 __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# PyInstaller
-*.manifest
-*.spec
-
-# Environments
+# Virtual environments
 .env
 .venv
 env/
@@ -39,41 +11,49 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-# Excluir ambiente Python externo opcional
 python_env/
 
-# IDE
+# Build and packaging
+build/
+dist/
+downloads/
+.eggs/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+
+# Runtime artifacts
+data/
+logs/
+*.log
+*.tmp
+*.temp
+.cache/
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
+.tox/
+.nox/
+.coverage*
+
+# Notebooks
+.ipynb_checkpoints/
+
+# IDE / OS
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+Thumbs.db
+.DS_Store
 
-# AEON Project - Large folders to exclude from Git
-archive/
-ARCHIVE_BACKUP/
-digital_twin/
-advanced/
-IA p2p trader/
-DAEMON PROJECT/
-venv/
-Nova pasta/
-TEST/
-aeon_historico/
-
-# AEON Project - Generated files
-*.log
-*.tmp
-*.cache
-aeon_report.json
-aeon_launcher.log
-*.pyc
-*.pyo
-*.pyd
-__pycache__/
-*.so
-
-# AEON Project - Large media files
+# Large/binary/media
+*.zip
+*.gz
+*.exe
+*.msi
+*.dmg
 *.png
 *.jpg
 *.jpeg
@@ -81,264 +61,14 @@ __pycache__/
 *.bmp
 *.pdf
 *.svg
-*.ico
 
-# AEON Project - Temporary and backup files
-*backup*
-*_backup_*
-Novo*.txt
-arte*.png
-baixados*.png
-cfvb.png
-HALO*.png
-perturbada.png
-*~
-*.swp
-*.swo
-
-# AEON Project - Model exports and data
-aeon_model_export/
-data/
-logs/
-*.npy
-*.npz
-*.pkl
-*.pickle
-*.h5
-*.hdf5
-
-# AEON Project - HTML exports and documentation builds
-*.html
-*_files/
-_build/
-docs/_build/
-
-# AEON Project - Configuration and secrets
-.env
-.env.local
-.env.*.local
-config.json
-secrets.json
-*.key
-*.pem
-*.crt
-
-# AEON Project - Development files
-.pytest_cache/
-.coverage
-coverage.xml
-*.cover
-.hypothesis/
-.tox/
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# AEON specific - temporary files
-*.tmp
-*.temp
+# Project-specific
 aeon_state.json
-
-# Large binary files (keep structure, ignore content)
-*.exe
-*.msi
-*.dmg
-
-# Generated visualizations (optional - remove if you want to track them)
-# visualizations/*.png
-
-# Generated data files (optional - remove if you want to track them)  
-# data/*.csv
-# data/*.npy
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# PyInstaller
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-# pipenv
-Pipfile.lock
-
-# PEP 582
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# Node.js
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
-# React build
-build/
-dist/
-
-# Environment variables
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# VS Code
-.vscode/
-*.code-workspace
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# API Keys
-*apikey*
-*api_key*
-*token*
-
-# Large files
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.mp4
-*.avi
-
-# Temporary files
-*.tmp
-*.temp
-~*
-
-# AEON specific
-aeon_state.json
-*.csv
-Figure_*.png
-*.json
-*.npy
-*.npz
-*.zip
-*.gz
-*.pdf
-*.dxf
-*.ipynb
-logs/
-archive/
-data/
-visualizations/
+aeon_report.json
+aeon_launcher.log
 aeon_model_export/
 aeon_historico/
-AEONCOSMA_WINDOWS_PACKAGE/
-aeoncosma_simulation_bundle/
-Digital Twin/
-GovTech/
-IA p2p trader/
-logs/
+archive/
+ARCHIVE_BACKUP/
 cache/
 tmp/
