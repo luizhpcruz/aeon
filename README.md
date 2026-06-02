@@ -8,12 +8,13 @@ O repositório foi organizado para seguir as melhores práticas de desenvolvimen
 
 *   **`src/`**: Código-fonte principal do sistema.
     *   **`core/`**: Motores centrais e lógica de evolução (`AEONKernel`, `AeonCosmaEngine`).
-    *   **`modules/`**: Módulos especializados (Criptografia, P2P, Quântico, Cosmologia e o novo `AEONCoreAnalyst`).
+    *   **`modules/`**: Módulos especializados (Criptografia, P2P, Quântico, Cosmologia, Blockchain/Atomic Swap e o `AEONCoreAnalyst`).
     *   **`api/`**: Endpoints e lógica de backend para integração.
     *   **`ui/`**: Interfaces de usuário e dashboards (Streamlit).
 *   **`config/`**: Arquivos de configuração e dependências.
 *   **`docs/`**: Documentação técnica, relatórios e fundamentos teóricos.
 *   **`tests/`**: Suíte de testes para garantir a integridade do sistema.
+*   **`docker-compose.yml`**: Orquestração da infraestrutura (API, Prometheus, Grafana).
 
 ## 🧠 Componentes Principais
 
@@ -26,10 +27,13 @@ O coração da evolução simbólica, processando informações e caos para refi
 ### AeonCosmaEngine
 O orquestrador modular que integra comunicações P2P, segurança quântica e modelos cosmológicos.
 
+### AEONBlockchain
+Módulo de persistência criptográfica que permite a criação de correntes de blocos locais e a execução de Atomic Swaps cross-chain.
+
 ## 🛠️ Como Começar
 
 1.  **Instalação**: As dependências estão listadas em `config/requirements.txt`.
-2.  **Execução**: O motor principal pode ser iniciado através do `src/core/engine.py`.
+2.  **Execução**: O motor principal pode ser iniciado através do `src/core/engine.py` ou via Docker com `docker-compose up`.
 3.  **Monitoramento**: Utilize os dashboards em `src/ui/` para visualizar o estado do sistema.
 
 ## 📄 Licença
