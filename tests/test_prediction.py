@@ -36,7 +36,7 @@ def test_abstains_when_volatility_exceeds_limit():
 
 def test_privacy_filter_drops_identifiers_and_keeps_measurements():
     clean = PrivacyFilter().remove_sensitive_fields(
-        {"email": "person@example.com", "name": "Pessoa", "energy": 0.7}
+        {"email": "[redacted]", "name": "[redacted]", "energy": 0.7}
     )
 
     assert clean == {"energy": 0.7}

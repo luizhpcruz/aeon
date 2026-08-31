@@ -99,6 +99,8 @@ perturbada.png
 # AEON Project - Model exports and data
 aeon_model_export/
 data/
+runs/offline/
+experiments/
 logs/
 *.npy
 *.npz
