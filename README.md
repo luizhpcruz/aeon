@@ -41,4 +41,4 @@ Módulo de persistência criptográfica que permite a criação de correntes de 
 Este projeto está sob a licença [LICENSE](LICENSE).
 
 ---
-Organizado por **Manus AI** em Junho de 2026.
+Organizado por **Manus AI** e luiz H. P. da Cruz em Junho de 2026.
